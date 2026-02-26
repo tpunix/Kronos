@@ -306,6 +306,7 @@ func_AD SH2addv  3  15
 func_AD SH2addc  3  14
 func_A SH2addi  7
 func_AD SH2add  3  12
+func_AD SH2puts  2  3
 
 func_default
 func_opcode

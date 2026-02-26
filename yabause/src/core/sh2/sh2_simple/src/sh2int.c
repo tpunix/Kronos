@@ -2474,6 +2474,29 @@ static void FASTCALL SH2sleep(SH2_struct * sh)
 }
 
 //////////////////////////////////////////////////////////////////////////////
+u8 MappedMemoryReadByte(SH2_struct*, u32);
+
+static void FASTCALL SH2puts(SH2_struct * sh)
+{
+	char buf[128];
+	u32 ch;
+	int p = 0;
+
+	while(p<127){
+		ch = MappedMemoryReadByte(sh, sh->regs.R[4]+p);
+		buf[p] = ch;
+		p += 1;
+		if(ch==0)
+			break;
+	}
+	buf[p] = 0;
+	LOGS("%s", buf);
+
+	sh->regs.PC += 2;
+	sh->cycles++;
+}
+
+//////////////////////////////////////////////////////////////////////////////
 
 static opcodefunc decode(u16 instruction)
 {
@@ -2561,7 +2584,8 @@ static opcodefunc decode(u16 instruction)
             case 13: return &SH2xtrct;
             case 14: return &SH2mulu;
             case 15: return &SH2muls;
-            default: return &SH2undecoded;
+			case 3: return &SH2puts;
+			//default: return &SH2undecoded;
          }
 
       case 3:

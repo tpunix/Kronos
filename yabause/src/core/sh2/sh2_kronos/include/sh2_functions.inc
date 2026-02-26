@@ -268759,6 +268759,1286 @@ void FASTCALL call_3_15_15_12(SH2_struct* sh)
 {
   SH2add(sh,15,15);
 }
+#define init_2_0_0_3
+void FASTCALL call_2_0_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,0);
+}
+#define init_2_0_1_3
+void FASTCALL call_2_0_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,1);
+}
+#define init_2_0_2_3
+void FASTCALL call_2_0_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,2);
+}
+#define init_2_0_3_3
+void FASTCALL call_2_0_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,3);
+}
+#define init_2_0_4_3
+void FASTCALL call_2_0_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,4);
+}
+#define init_2_0_5_3
+void FASTCALL call_2_0_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,5);
+}
+#define init_2_0_6_3
+void FASTCALL call_2_0_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,6);
+}
+#define init_2_0_7_3
+void FASTCALL call_2_0_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,7);
+}
+#define init_2_0_8_3
+void FASTCALL call_2_0_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,8);
+}
+#define init_2_0_9_3
+void FASTCALL call_2_0_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,9);
+}
+#define init_2_0_10_3
+void FASTCALL call_2_0_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,10);
+}
+#define init_2_0_11_3
+void FASTCALL call_2_0_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,11);
+}
+#define init_2_0_12_3
+void FASTCALL call_2_0_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,12);
+}
+#define init_2_0_13_3
+void FASTCALL call_2_0_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,13);
+}
+#define init_2_0_14_3
+void FASTCALL call_2_0_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,14);
+}
+#define init_2_0_15_3
+void FASTCALL call_2_0_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,0,15);
+}
+#define init_2_1_0_3
+void FASTCALL call_2_1_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,0);
+}
+#define init_2_1_1_3
+void FASTCALL call_2_1_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,1);
+}
+#define init_2_1_2_3
+void FASTCALL call_2_1_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,2);
+}
+#define init_2_1_3_3
+void FASTCALL call_2_1_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,3);
+}
+#define init_2_1_4_3
+void FASTCALL call_2_1_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,4);
+}
+#define init_2_1_5_3
+void FASTCALL call_2_1_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,5);
+}
+#define init_2_1_6_3
+void FASTCALL call_2_1_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,6);
+}
+#define init_2_1_7_3
+void FASTCALL call_2_1_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,7);
+}
+#define init_2_1_8_3
+void FASTCALL call_2_1_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,8);
+}
+#define init_2_1_9_3
+void FASTCALL call_2_1_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,9);
+}
+#define init_2_1_10_3
+void FASTCALL call_2_1_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,10);
+}
+#define init_2_1_11_3
+void FASTCALL call_2_1_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,11);
+}
+#define init_2_1_12_3
+void FASTCALL call_2_1_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,12);
+}
+#define init_2_1_13_3
+void FASTCALL call_2_1_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,13);
+}
+#define init_2_1_14_3
+void FASTCALL call_2_1_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,14);
+}
+#define init_2_1_15_3
+void FASTCALL call_2_1_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,1,15);
+}
+#define init_2_2_0_3
+void FASTCALL call_2_2_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,0);
+}
+#define init_2_2_1_3
+void FASTCALL call_2_2_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,1);
+}
+#define init_2_2_2_3
+void FASTCALL call_2_2_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,2);
+}
+#define init_2_2_3_3
+void FASTCALL call_2_2_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,3);
+}
+#define init_2_2_4_3
+void FASTCALL call_2_2_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,4);
+}
+#define init_2_2_5_3
+void FASTCALL call_2_2_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,5);
+}
+#define init_2_2_6_3
+void FASTCALL call_2_2_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,6);
+}
+#define init_2_2_7_3
+void FASTCALL call_2_2_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,7);
+}
+#define init_2_2_8_3
+void FASTCALL call_2_2_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,8);
+}
+#define init_2_2_9_3
+void FASTCALL call_2_2_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,9);
+}
+#define init_2_2_10_3
+void FASTCALL call_2_2_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,10);
+}
+#define init_2_2_11_3
+void FASTCALL call_2_2_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,11);
+}
+#define init_2_2_12_3
+void FASTCALL call_2_2_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,12);
+}
+#define init_2_2_13_3
+void FASTCALL call_2_2_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,13);
+}
+#define init_2_2_14_3
+void FASTCALL call_2_2_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,14);
+}
+#define init_2_2_15_3
+void FASTCALL call_2_2_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,2,15);
+}
+#define init_2_3_0_3
+void FASTCALL call_2_3_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,0);
+}
+#define init_2_3_1_3
+void FASTCALL call_2_3_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,1);
+}
+#define init_2_3_2_3
+void FASTCALL call_2_3_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,2);
+}
+#define init_2_3_3_3
+void FASTCALL call_2_3_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,3);
+}
+#define init_2_3_4_3
+void FASTCALL call_2_3_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,4);
+}
+#define init_2_3_5_3
+void FASTCALL call_2_3_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,5);
+}
+#define init_2_3_6_3
+void FASTCALL call_2_3_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,6);
+}
+#define init_2_3_7_3
+void FASTCALL call_2_3_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,7);
+}
+#define init_2_3_8_3
+void FASTCALL call_2_3_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,8);
+}
+#define init_2_3_9_3
+void FASTCALL call_2_3_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,9);
+}
+#define init_2_3_10_3
+void FASTCALL call_2_3_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,10);
+}
+#define init_2_3_11_3
+void FASTCALL call_2_3_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,11);
+}
+#define init_2_3_12_3
+void FASTCALL call_2_3_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,12);
+}
+#define init_2_3_13_3
+void FASTCALL call_2_3_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,13);
+}
+#define init_2_3_14_3
+void FASTCALL call_2_3_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,14);
+}
+#define init_2_3_15_3
+void FASTCALL call_2_3_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,3,15);
+}
+#define init_2_4_0_3
+void FASTCALL call_2_4_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,0);
+}
+#define init_2_4_1_3
+void FASTCALL call_2_4_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,1);
+}
+#define init_2_4_2_3
+void FASTCALL call_2_4_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,2);
+}
+#define init_2_4_3_3
+void FASTCALL call_2_4_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,3);
+}
+#define init_2_4_4_3
+void FASTCALL call_2_4_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,4);
+}
+#define init_2_4_5_3
+void FASTCALL call_2_4_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,5);
+}
+#define init_2_4_6_3
+void FASTCALL call_2_4_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,6);
+}
+#define init_2_4_7_3
+void FASTCALL call_2_4_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,7);
+}
+#define init_2_4_8_3
+void FASTCALL call_2_4_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,8);
+}
+#define init_2_4_9_3
+void FASTCALL call_2_4_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,9);
+}
+#define init_2_4_10_3
+void FASTCALL call_2_4_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,10);
+}
+#define init_2_4_11_3
+void FASTCALL call_2_4_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,11);
+}
+#define init_2_4_12_3
+void FASTCALL call_2_4_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,12);
+}
+#define init_2_4_13_3
+void FASTCALL call_2_4_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,13);
+}
+#define init_2_4_14_3
+void FASTCALL call_2_4_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,14);
+}
+#define init_2_4_15_3
+void FASTCALL call_2_4_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,4,15);
+}
+#define init_2_5_0_3
+void FASTCALL call_2_5_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,0);
+}
+#define init_2_5_1_3
+void FASTCALL call_2_5_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,1);
+}
+#define init_2_5_2_3
+void FASTCALL call_2_5_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,2);
+}
+#define init_2_5_3_3
+void FASTCALL call_2_5_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,3);
+}
+#define init_2_5_4_3
+void FASTCALL call_2_5_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,4);
+}
+#define init_2_5_5_3
+void FASTCALL call_2_5_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,5);
+}
+#define init_2_5_6_3
+void FASTCALL call_2_5_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,6);
+}
+#define init_2_5_7_3
+void FASTCALL call_2_5_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,7);
+}
+#define init_2_5_8_3
+void FASTCALL call_2_5_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,8);
+}
+#define init_2_5_9_3
+void FASTCALL call_2_5_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,9);
+}
+#define init_2_5_10_3
+void FASTCALL call_2_5_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,10);
+}
+#define init_2_5_11_3
+void FASTCALL call_2_5_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,11);
+}
+#define init_2_5_12_3
+void FASTCALL call_2_5_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,12);
+}
+#define init_2_5_13_3
+void FASTCALL call_2_5_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,13);
+}
+#define init_2_5_14_3
+void FASTCALL call_2_5_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,14);
+}
+#define init_2_5_15_3
+void FASTCALL call_2_5_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,5,15);
+}
+#define init_2_6_0_3
+void FASTCALL call_2_6_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,0);
+}
+#define init_2_6_1_3
+void FASTCALL call_2_6_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,1);
+}
+#define init_2_6_2_3
+void FASTCALL call_2_6_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,2);
+}
+#define init_2_6_3_3
+void FASTCALL call_2_6_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,3);
+}
+#define init_2_6_4_3
+void FASTCALL call_2_6_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,4);
+}
+#define init_2_6_5_3
+void FASTCALL call_2_6_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,5);
+}
+#define init_2_6_6_3
+void FASTCALL call_2_6_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,6);
+}
+#define init_2_6_7_3
+void FASTCALL call_2_6_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,7);
+}
+#define init_2_6_8_3
+void FASTCALL call_2_6_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,8);
+}
+#define init_2_6_9_3
+void FASTCALL call_2_6_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,9);
+}
+#define init_2_6_10_3
+void FASTCALL call_2_6_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,10);
+}
+#define init_2_6_11_3
+void FASTCALL call_2_6_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,11);
+}
+#define init_2_6_12_3
+void FASTCALL call_2_6_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,12);
+}
+#define init_2_6_13_3
+void FASTCALL call_2_6_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,13);
+}
+#define init_2_6_14_3
+void FASTCALL call_2_6_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,14);
+}
+#define init_2_6_15_3
+void FASTCALL call_2_6_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,6,15);
+}
+#define init_2_7_0_3
+void FASTCALL call_2_7_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,0);
+}
+#define init_2_7_1_3
+void FASTCALL call_2_7_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,1);
+}
+#define init_2_7_2_3
+void FASTCALL call_2_7_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,2);
+}
+#define init_2_7_3_3
+void FASTCALL call_2_7_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,3);
+}
+#define init_2_7_4_3
+void FASTCALL call_2_7_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,4);
+}
+#define init_2_7_5_3
+void FASTCALL call_2_7_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,5);
+}
+#define init_2_7_6_3
+void FASTCALL call_2_7_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,6);
+}
+#define init_2_7_7_3
+void FASTCALL call_2_7_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,7);
+}
+#define init_2_7_8_3
+void FASTCALL call_2_7_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,8);
+}
+#define init_2_7_9_3
+void FASTCALL call_2_7_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,9);
+}
+#define init_2_7_10_3
+void FASTCALL call_2_7_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,10);
+}
+#define init_2_7_11_3
+void FASTCALL call_2_7_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,11);
+}
+#define init_2_7_12_3
+void FASTCALL call_2_7_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,12);
+}
+#define init_2_7_13_3
+void FASTCALL call_2_7_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,13);
+}
+#define init_2_7_14_3
+void FASTCALL call_2_7_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,14);
+}
+#define init_2_7_15_3
+void FASTCALL call_2_7_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,7,15);
+}
+#define init_2_8_0_3
+void FASTCALL call_2_8_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,0);
+}
+#define init_2_8_1_3
+void FASTCALL call_2_8_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,1);
+}
+#define init_2_8_2_3
+void FASTCALL call_2_8_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,2);
+}
+#define init_2_8_3_3
+void FASTCALL call_2_8_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,3);
+}
+#define init_2_8_4_3
+void FASTCALL call_2_8_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,4);
+}
+#define init_2_8_5_3
+void FASTCALL call_2_8_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,5);
+}
+#define init_2_8_6_3
+void FASTCALL call_2_8_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,6);
+}
+#define init_2_8_7_3
+void FASTCALL call_2_8_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,7);
+}
+#define init_2_8_8_3
+void FASTCALL call_2_8_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,8);
+}
+#define init_2_8_9_3
+void FASTCALL call_2_8_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,9);
+}
+#define init_2_8_10_3
+void FASTCALL call_2_8_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,10);
+}
+#define init_2_8_11_3
+void FASTCALL call_2_8_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,11);
+}
+#define init_2_8_12_3
+void FASTCALL call_2_8_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,12);
+}
+#define init_2_8_13_3
+void FASTCALL call_2_8_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,13);
+}
+#define init_2_8_14_3
+void FASTCALL call_2_8_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,14);
+}
+#define init_2_8_15_3
+void FASTCALL call_2_8_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,8,15);
+}
+#define init_2_9_0_3
+void FASTCALL call_2_9_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,0);
+}
+#define init_2_9_1_3
+void FASTCALL call_2_9_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,1);
+}
+#define init_2_9_2_3
+void FASTCALL call_2_9_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,2);
+}
+#define init_2_9_3_3
+void FASTCALL call_2_9_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,3);
+}
+#define init_2_9_4_3
+void FASTCALL call_2_9_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,4);
+}
+#define init_2_9_5_3
+void FASTCALL call_2_9_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,5);
+}
+#define init_2_9_6_3
+void FASTCALL call_2_9_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,6);
+}
+#define init_2_9_7_3
+void FASTCALL call_2_9_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,7);
+}
+#define init_2_9_8_3
+void FASTCALL call_2_9_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,8);
+}
+#define init_2_9_9_3
+void FASTCALL call_2_9_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,9);
+}
+#define init_2_9_10_3
+void FASTCALL call_2_9_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,10);
+}
+#define init_2_9_11_3
+void FASTCALL call_2_9_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,11);
+}
+#define init_2_9_12_3
+void FASTCALL call_2_9_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,12);
+}
+#define init_2_9_13_3
+void FASTCALL call_2_9_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,13);
+}
+#define init_2_9_14_3
+void FASTCALL call_2_9_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,14);
+}
+#define init_2_9_15_3
+void FASTCALL call_2_9_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,9,15);
+}
+#define init_2_10_0_3
+void FASTCALL call_2_10_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,0);
+}
+#define init_2_10_1_3
+void FASTCALL call_2_10_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,1);
+}
+#define init_2_10_2_3
+void FASTCALL call_2_10_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,2);
+}
+#define init_2_10_3_3
+void FASTCALL call_2_10_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,3);
+}
+#define init_2_10_4_3
+void FASTCALL call_2_10_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,4);
+}
+#define init_2_10_5_3
+void FASTCALL call_2_10_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,5);
+}
+#define init_2_10_6_3
+void FASTCALL call_2_10_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,6);
+}
+#define init_2_10_7_3
+void FASTCALL call_2_10_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,7);
+}
+#define init_2_10_8_3
+void FASTCALL call_2_10_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,8);
+}
+#define init_2_10_9_3
+void FASTCALL call_2_10_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,9);
+}
+#define init_2_10_10_3
+void FASTCALL call_2_10_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,10);
+}
+#define init_2_10_11_3
+void FASTCALL call_2_10_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,11);
+}
+#define init_2_10_12_3
+void FASTCALL call_2_10_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,12);
+}
+#define init_2_10_13_3
+void FASTCALL call_2_10_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,13);
+}
+#define init_2_10_14_3
+void FASTCALL call_2_10_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,14);
+}
+#define init_2_10_15_3
+void FASTCALL call_2_10_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,10,15);
+}
+#define init_2_11_0_3
+void FASTCALL call_2_11_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,0);
+}
+#define init_2_11_1_3
+void FASTCALL call_2_11_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,1);
+}
+#define init_2_11_2_3
+void FASTCALL call_2_11_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,2);
+}
+#define init_2_11_3_3
+void FASTCALL call_2_11_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,3);
+}
+#define init_2_11_4_3
+void FASTCALL call_2_11_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,4);
+}
+#define init_2_11_5_3
+void FASTCALL call_2_11_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,5);
+}
+#define init_2_11_6_3
+void FASTCALL call_2_11_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,6);
+}
+#define init_2_11_7_3
+void FASTCALL call_2_11_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,7);
+}
+#define init_2_11_8_3
+void FASTCALL call_2_11_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,8);
+}
+#define init_2_11_9_3
+void FASTCALL call_2_11_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,9);
+}
+#define init_2_11_10_3
+void FASTCALL call_2_11_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,10);
+}
+#define init_2_11_11_3
+void FASTCALL call_2_11_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,11);
+}
+#define init_2_11_12_3
+void FASTCALL call_2_11_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,12);
+}
+#define init_2_11_13_3
+void FASTCALL call_2_11_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,13);
+}
+#define init_2_11_14_3
+void FASTCALL call_2_11_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,14);
+}
+#define init_2_11_15_3
+void FASTCALL call_2_11_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,11,15);
+}
+#define init_2_12_0_3
+void FASTCALL call_2_12_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,0);
+}
+#define init_2_12_1_3
+void FASTCALL call_2_12_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,1);
+}
+#define init_2_12_2_3
+void FASTCALL call_2_12_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,2);
+}
+#define init_2_12_3_3
+void FASTCALL call_2_12_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,3);
+}
+#define init_2_12_4_3
+void FASTCALL call_2_12_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,4);
+}
+#define init_2_12_5_3
+void FASTCALL call_2_12_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,5);
+}
+#define init_2_12_6_3
+void FASTCALL call_2_12_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,6);
+}
+#define init_2_12_7_3
+void FASTCALL call_2_12_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,7);
+}
+#define init_2_12_8_3
+void FASTCALL call_2_12_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,8);
+}
+#define init_2_12_9_3
+void FASTCALL call_2_12_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,9);
+}
+#define init_2_12_10_3
+void FASTCALL call_2_12_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,10);
+}
+#define init_2_12_11_3
+void FASTCALL call_2_12_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,11);
+}
+#define init_2_12_12_3
+void FASTCALL call_2_12_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,12);
+}
+#define init_2_12_13_3
+void FASTCALL call_2_12_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,13);
+}
+#define init_2_12_14_3
+void FASTCALL call_2_12_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,14);
+}
+#define init_2_12_15_3
+void FASTCALL call_2_12_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,12,15);
+}
+#define init_2_13_0_3
+void FASTCALL call_2_13_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,0);
+}
+#define init_2_13_1_3
+void FASTCALL call_2_13_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,1);
+}
+#define init_2_13_2_3
+void FASTCALL call_2_13_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,2);
+}
+#define init_2_13_3_3
+void FASTCALL call_2_13_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,3);
+}
+#define init_2_13_4_3
+void FASTCALL call_2_13_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,4);
+}
+#define init_2_13_5_3
+void FASTCALL call_2_13_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,5);
+}
+#define init_2_13_6_3
+void FASTCALL call_2_13_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,6);
+}
+#define init_2_13_7_3
+void FASTCALL call_2_13_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,7);
+}
+#define init_2_13_8_3
+void FASTCALL call_2_13_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,8);
+}
+#define init_2_13_9_3
+void FASTCALL call_2_13_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,9);
+}
+#define init_2_13_10_3
+void FASTCALL call_2_13_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,10);
+}
+#define init_2_13_11_3
+void FASTCALL call_2_13_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,11);
+}
+#define init_2_13_12_3
+void FASTCALL call_2_13_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,12);
+}
+#define init_2_13_13_3
+void FASTCALL call_2_13_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,13);
+}
+#define init_2_13_14_3
+void FASTCALL call_2_13_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,14);
+}
+#define init_2_13_15_3
+void FASTCALL call_2_13_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,13,15);
+}
+#define init_2_14_0_3
+void FASTCALL call_2_14_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,0);
+}
+#define init_2_14_1_3
+void FASTCALL call_2_14_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,1);
+}
+#define init_2_14_2_3
+void FASTCALL call_2_14_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,2);
+}
+#define init_2_14_3_3
+void FASTCALL call_2_14_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,3);
+}
+#define init_2_14_4_3
+void FASTCALL call_2_14_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,4);
+}
+#define init_2_14_5_3
+void FASTCALL call_2_14_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,5);
+}
+#define init_2_14_6_3
+void FASTCALL call_2_14_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,6);
+}
+#define init_2_14_7_3
+void FASTCALL call_2_14_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,7);
+}
+#define init_2_14_8_3
+void FASTCALL call_2_14_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,8);
+}
+#define init_2_14_9_3
+void FASTCALL call_2_14_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,9);
+}
+#define init_2_14_10_3
+void FASTCALL call_2_14_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,10);
+}
+#define init_2_14_11_3
+void FASTCALL call_2_14_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,11);
+}
+#define init_2_14_12_3
+void FASTCALL call_2_14_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,12);
+}
+#define init_2_14_13_3
+void FASTCALL call_2_14_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,13);
+}
+#define init_2_14_14_3
+void FASTCALL call_2_14_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,14);
+}
+#define init_2_14_15_3
+void FASTCALL call_2_14_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,14,15);
+}
+#define init_2_15_0_3
+void FASTCALL call_2_15_0_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,0);
+}
+#define init_2_15_1_3
+void FASTCALL call_2_15_1_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,1);
+}
+#define init_2_15_2_3
+void FASTCALL call_2_15_2_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,2);
+}
+#define init_2_15_3_3
+void FASTCALL call_2_15_3_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,3);
+}
+#define init_2_15_4_3
+void FASTCALL call_2_15_4_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,4);
+}
+#define init_2_15_5_3
+void FASTCALL call_2_15_5_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,5);
+}
+#define init_2_15_6_3
+void FASTCALL call_2_15_6_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,6);
+}
+#define init_2_15_7_3
+void FASTCALL call_2_15_7_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,7);
+}
+#define init_2_15_8_3
+void FASTCALL call_2_15_8_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,8);
+}
+#define init_2_15_9_3
+void FASTCALL call_2_15_9_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,9);
+}
+#define init_2_15_10_3
+void FASTCALL call_2_15_10_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,10);
+}
+#define init_2_15_11_3
+void FASTCALL call_2_15_11_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,11);
+}
+#define init_2_15_12_3
+void FASTCALL call_2_15_12_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,12);
+}
+#define init_2_15_13_3
+void FASTCALL call_2_15_13_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,13);
+}
+#define init_2_15_14_3
+void FASTCALL call_2_15_14_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,14);
+}
+#define init_2_15_15_3
+void FASTCALL call_2_15_15_3(SH2_struct* sh)
+{
+  SH2puts(sh,15,15);
+}
 #ifndef init_0_0_0_0
 #define init_0_0_0_0
 void FASTCALL call_0_0_0_0(SH2_struct* sh)

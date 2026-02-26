@@ -2179,5 +2179,29 @@ static void SH2sleep(SH2_struct * sh)
    sh->cycles += 3;
 }
 
+//////////////////////////////////////////////////////////////////////////////
+
+static void SH2puts(SH2_struct * sh, u32 n, u32 m)
+{
+	char buf[128];
+	u32 ch;
+	int p = 0;
+
+	while(p<127){
+		ch = SH2MappedMemoryReadByte(sh, sh->regs.R[4]+p);
+		buf[p] = ch;
+		p += 1;
+		if(ch==0)
+			break;
+	}
+	buf[p] = 0;
+	LOGS("%s", buf);
+
+	sh->regs.PC += 2;
+	sh->cycles++;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
 #include "sh2_functions.inc"
 

@@ -177,11 +177,8 @@ add_definitions(-DIMPROVED_SAVESTATES)
 
 # add_definitions(-DBUP_DEBUG)
 
-add_subdirectory(tools/libchdr)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tools/libchdr/src)
-set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} chdr-static)
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tools/libchdr/deps/zlib-1.2.11)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tools/zlib-1.2.11  EXCLUDE_FROM_ALL)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tools/zlib-1.2.11)
 set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} zlibstatic)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tools/nanovg)
@@ -203,11 +200,12 @@ endif()
 include(${CMAKE_SOURCE_DIR}/l10n/CMakeLists.txt)
 
 #-------------------------------------------------------
-  set(kronos_SOURCES
-    ${kronos_SOURCES}
-    core/sh2/sh2_kronos/src/sh2int.c
-    core/sh2/sh2_kronos/src/sh2_opcodes.c
-  )
+set(kronos_SOURCES
+	${kronos_SOURCES}
+	core/sh2/sh2_kronos/src/sh2int.c
+	core/sh2/sh2_kronos/src/sh2_opcodes.c
+)
+
 if (MSVC)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /bigobj")
         set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} /bigobj")

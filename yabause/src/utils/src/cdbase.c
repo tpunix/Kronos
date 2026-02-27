@@ -37,7 +37,6 @@
 #include "debug.h"
 #include "junzip.h"
 #include "zlib.h"
-#include "chd.h"
 
 #ifndef HAVE_STRICMP
 #ifdef HAVE_STRCASECMP
@@ -283,9 +282,6 @@ typedef struct
    u32 extraframes;
    u32 pregap;
    u32 postgap;
-   u32 physframeofs;
-   u32 chdframeofs;
-   u32 logframeofs;
    int isZip;
    char* filename;
    ZipEntry* tr;
@@ -389,7 +385,7 @@ typedef struct
 } ccd_struct;
 
 static const u8 syncHdr[12] = { 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00 };
-enum IMG_TYPE { IMG_NONE, IMG_ISO, IMG_BINCUE, IMG_MDS, IMG_CCD, IMG_CHD, IMG_NRG };
+enum IMG_TYPE { IMG_NONE, IMG_ISO, IMG_BINCUE, IMG_MDS, IMG_CCD, IMG_NRG };
 enum IMG_TYPE imgtype = IMG_ISO;
 static u32 isoTOC[102];
 static disc_info_struct disc;
@@ -507,8 +503,6 @@ static FILE* OpenFile(char* buffer, const char* cue) {
    return ret_file;
 }
 
-static int LoadCHD(const char *chd_filename, FILE *iso_file);
-static int ISOCDReadSectorFADFromCHD(u32 FAD, void *buffer);
 
 static int LoadBinCue(const char *cuefilename, FILE *iso_file)
 {
@@ -1634,12 +1628,6 @@ static int ISOCDInit(const char * iso) {
   	imgtype = IMG_CCD;
   	ret = LoadCCD(iso, iso_file);
    }
-  else if (stricmp(ext, ".CHD") == 0)
-  {
-    // It's a CCD
-    imgtype = IMG_CHD;
-    ret = LoadCHD(iso, iso_file);
-  }
    else
    {
       // Assume it's an ISO file
@@ -1764,10 +1752,6 @@ static int ISOCDReadSectorFAD(u32 FAD, void *buffer) {
    int offset = 0;
 
    assert(disc.session);
-
-   if (IMG_CHD == imgtype) {
-     return ISOCDReadSectorFADFromCHD(FAD,buffer);
-   }
 
    memset(buffer, 0, 2448);
 
@@ -1896,294 +1880,3 @@ static void ISOCDReadAheadFAD(UNUSED u32 FAD)
 
 //////////////////////////////////////////////////////////////////////////////
 
-#define CD_MAX_SECTOR_DATA      (2352)
-#define CD_MAX_SUBCODE_DATA     (96)
-#define CD_FRAME_SIZE           (CD_MAX_SECTOR_DATA + CD_MAX_SUBCODE_DATA)
-#define CD_MAX_TRACKS           (99)    /* AFAIK the theoretical limit */
-#define CD_TRACK_PADDING 4
-
-typedef struct ChdInfo_ {
-  chd_file *chd;
-  core_file * image_file;
-  const chd_header * header;
-  char * hunk_buffer;
-  int current_hunk_id;
-} ChdInfo;
-
-ChdInfo * pChdInfo = NULL;
-
-static int LoadCHD(const char *chd_filename, FILE *iso_file)
-{
-  int trak_number;
-  char track_type[64];
-  char track_subtype[64];
-  int frame = 0;
-  int pregap = 0;
-  char pg_type[64];
-  char pg_sub_type[64];
-  int postgap = 0;
-
-  int meta_outlen = 512 * 1024;
-  u8 * buf = (u8*)calloc(1, meta_outlen);
-  u32 resultlen;
-  u32 resulttag;
-  u8 resultflags;
-
-  if (pChdInfo != NULL) {
-    free(pChdInfo);
-    pChdInfo = NULL;
-  }
-
-  pChdInfo = (ChdInfo*)calloc(1, sizeof(ChdInfo));
-  memset(pChdInfo, 0, sizeof(ChdInfo));
-
-  track_info_struct trk[100];
-  memset(trk, 0, sizeof(trk));
-
-  int num_tracks = 0;
-
-  chd_error error = chd_open(chd_filename, CHD_OPEN_READ, NULL, &pChdInfo->chd);
-  if (error != CHDERR_NONE) {
-    free(buf);
-    return -1;
-  }
-
-  pChdInfo->header = chd_get_header(pChdInfo->chd);
-
-  trk[num_tracks].fad_start = frame + pregap + 150;
-
-  while ( chd_get_metadata(pChdInfo->chd, 0, num_tracks, buf, meta_outlen, &resultlen, &resulttag, &resultflags) == CHDERR_NONE )  {
-
-    LOG("track info %s", buf);
-    switch (resulttag) {
-    case CDROM_TRACK_METADATA_TAG:
-      sscanf((const char*)buf, CDROM_TRACK_METADATA_FORMAT, &trak_number, track_type, track_subtype, &frame);
-      pregap = 0;
-      postgap = 0;
-      sprintf(pg_type, "NONE");
-      break;
-    case CDROM_TRACK_METADATA2_TAG:
-      sscanf((const char*)buf, CDROM_TRACK_METADATA2_FORMAT, &trak_number, track_type, track_subtype, &frame, &pregap, pg_type, pg_sub_type, &postgap);
-      break;
-    default:
-      return -1;
-    }
-
-    trk[num_tracks].pregap = pregap;
-    trk[num_tracks].postgap = postgap;
-
-    trk[num_tracks].frames = frame;
-    int padded = (frame + CD_TRACK_PADDING - 1) / CD_TRACK_PADDING;
-    trk[num_tracks].extraframes = padded * CD_TRACK_PADDING - frame;
-
-
-    if (!strcmp(track_type, "MODE1"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2048;
-    }
-    else if (!strcmp(track_type, "MODE1/2048"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2048;
-    }
-    else if (!strcmp(track_type, "MODE1_RAW"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2352;
-    }
-    else if (!strcmp(track_type, "MODE1/2352"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2352;
-    }
-    else if (!strcmp(track_type, "MODE2"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2336;
-    }
-    else if (!strcmp(track_type, "MODE2/2336"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2336;
-    }
-    else if (!strcmp(track_type, "MODE2_FORM1"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2048;
-    }
-    else if (!strcmp(track_type, "MODE2/2048"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2048;
-    }
-    else if (!strcmp(track_type, "MODE2_FORM2"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2324;
-    }
-    else if (!strcmp(track_type, "MODE2/2324"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2324;
-    }
-    else if (!strcmp(track_type, "MODE2_FORM_MIX"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2336;
-    }
-    else if (!strcmp(track_type, "MODE2/2336"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2336;
-    }
-    else if (!strcmp(track_type, "MODE2_RAW"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2352;
-    }
-    else if (!strcmp(track_type, "MODE2/2352"))
-    {
-      trk[num_tracks].ctl_addr = 0x41;
-      trk[num_tracks].sector_size = 2352;
-    }
-    else if (!strcmp(track_type, "AUDIO"))
-    {
-      trk[num_tracks].ctl_addr = 0x01;
-      trk[num_tracks].sector_size = 2352;
-      //trk[num_tracks].pregap = 0;
-    }
-
-    //trk[num_tracks].fad_start = trk[num_tracks].fad_start + pregap;
-    //trk[num_tracks].fad_end = trk[num_tracks].fad_start + (frame - 1) + postgap;
-    //frame = trk[num_tracks].fad_end+1;
-    num_tracks++;
-    //trk[num_tracks].fad_start = frame;
-  }
-  free(buf);
-
-  trk[num_tracks].file_offset = 0;
-  trk[num_tracks].fad_start = 0xFFFFFFFF;
-
-  u32 chdofs = 0;
-  u32 physofs = 0;
-  u32 logofs = 150;
-  int i;
-  for (i = 0; i < num_tracks; i++)
-  {
-    trk[i].fad_start = logofs + trk[i].pregap;
-
-    trk[i].physframeofs = physofs;
-    trk[i].chdframeofs = chdofs;
-    trk[i].logframeofs = logofs;
-
-    //logofs += trk[i].pregap;
-    //logofs += trk[i].postgap;
-    logofs += trk[i].frames;
-    trk[i].fad_end = logofs;
-
-    physofs += trk[i].frames;
-
-    chdofs += trk[i].frames;
-    chdofs += trk[i].extraframes;
-  }
-  trk[i].logframeofs = logofs;
-  trk[i].physframeofs = physofs;
-  trk[i].chdframeofs = chdofs;
-
-  //trk[num_tracks - 1].fad_end = (pChdInfo->header->logicalbytes - trk[num_tracks - 1].file_offset) / trk[num_tracks - 1].sector_size;
-
-  disc.session_num = 1;
-  disc.session = (session_info_struct*)calloc(1, sizeof(session_info_struct) * disc.session_num);
-  if (disc.session == NULL)
-  {
-    YabSetError(YAB_ERR_MEMORYALLOC, NULL);
-    return -1;
-  }
-  disc.session[0].fad_start = 150;
-  disc.session[0].fad_end = trk[num_tracks - 1].fad_end;
-  disc.session[0].track_num = num_tracks;
-  disc.session[0].track = (track_info_struct*)calloc(1, sizeof(track_info_struct) * disc.session[0].track_num);
-  if (disc.session[0].track == NULL)
-  {
-    YabSetError(YAB_ERR_MEMORYALLOC, NULL);
-    free(disc.session);
-    disc.session = NULL;
-    disc.session_num = 0;
-    return -1;
-  }
-
-  memcpy(disc.session[0].track, trk, num_tracks * sizeof(track_info_struct));
-
-  pChdInfo->hunk_buffer = (char*)calloc(1, pChdInfo->header->hunkbytes);
-  chd_read(pChdInfo->chd, 0, pChdInfo->hunk_buffer);
-  pChdInfo->current_hunk_id = 0;
-
-  return 0;
-}
-
-
-static int ISOCDReadSectorFADFromCHD(u32 FAD, void *buffer) {
-  int i, j;
-  size_t num_read = 0;
-  track_info_struct *track = NULL;
-  u32 chdlba;
-  u32 physlba;
-  u32 loglba = FAD;
-
-  chdlba = loglba;
-  for (i = 0; i < disc.session_num; i++)
-  {
-    for (j = 0; j < disc.session[i].track_num-1 ; j++)
-    {
-      //if (j == 1) {
-      //  int a = 0;
-      //}
-      if (loglba < disc.session[i].track[j+1].logframeofs) {
-        //if ((loglba > disc.session[i].track[j].pregap)) {
-       //   loglba -= disc.session[i].track[j].pregap;
-       // }
-        physlba = disc.session[i].track[j].physframeofs + (loglba - disc.session[i].track[j].logframeofs);
-        //if (disc.session[i].track[j].ctl_addr == 0x01) {
-        //  physlba += disc.session[i].track[j].pregap;
-        //}
-        chdlba = physlba - disc.session[i].track[j].physframeofs + disc.session[i].track[j].chdframeofs;
-        track = &disc.session[i].track[j];
-        break;
-      }
-    }
-  }
-
-  if (track == NULL)
-  {
-    CDLOG("Warning: Sector not found in track list");
-    return 0;
-  }
-
-  int hunkid = (chdlba*CD_FRAME_SIZE) / pChdInfo->header->hunkbytes ;
-  int hunk_offset =  (chdlba*CD_FRAME_SIZE) % pChdInfo->header->hunkbytes;
-
-  if (pChdInfo->current_hunk_id != hunkid) {
-    chd_read(pChdInfo->chd, hunkid, pChdInfo->hunk_buffer);
-    pChdInfo->current_hunk_id = hunkid;
-  }
-
-  if (track->ctl_addr == 0x01) {
-    for (int i = 0; i < track->sector_size; i += 2) {
-      ((char*)buffer)[i] = pChdInfo->hunk_buffer[hunk_offset + i + 1];
-      ((char*)buffer)[i+1] = pChdInfo->hunk_buffer[hunk_offset + i];
-    }
-  }
-  else {
-    if (track->sector_size == 2048)
-    {
-      memcpy(buffer, syncHdr, 12);
-      memcpy((char *)buffer + 0x10, pChdInfo->hunk_buffer + hunk_offset, track->sector_size);
-    }
-    else {
-      memcpy(buffer, pChdInfo->hunk_buffer + hunk_offset, track->sector_size);
-    }
-  }
-
-  return 1;
-}

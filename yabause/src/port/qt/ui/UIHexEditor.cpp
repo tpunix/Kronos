@@ -774,7 +774,7 @@ void UIHexEditorWnd::drawHexArea(QPainter *painter, int firstLineIdx, u32 lastLi
             }
 
             // Paint hex value
-            text=QString("%1").arg(readByte(addr + lineIdx + colIdx - firstLineIdx), 2, 16, QChar('0')).toUpper();
+            text = QString::asprintf("%02X", readByte(addr + lineIdx + colIdx - firstLineIdx));
             painter->drawText(xPos, yPos, text);
             xPos += text.length() * fontWidth;
          }

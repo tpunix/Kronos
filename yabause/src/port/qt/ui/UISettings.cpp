@@ -701,9 +701,9 @@ void UISettings::loadSettings()
 	cbFullscreen->setChecked( s->value( "Video/Fullscreen", false ).toBool() );
 
 	cbFilterMode->setCurrentIndex(cbFilterMode->findData(s->value("Video/filter_type", mVideoFilterMode.at(0).id).toInt()));
-        cbUpscaleMode->setCurrentIndex(cbUpscaleMode->findData(s->value("Video/upscale_type", mUpscaleFilterMode.at(0).id).toInt()));
+	cbUpscaleMode->setCurrentIndex(cbUpscaleMode->findData(s->value("Video/upscale_type", mUpscaleFilterMode.at(0).id).toInt()));
 	cbResolution->setCurrentIndex(cbResolution->findData(s->value("Video/resolution_mode", mResolutionMode.at(0).id).toInt()));
-  cbAspectRatio->setCurrentIndex(cbAspectRatio->findData(s->value("Video/AspectRatio", mAspectRatio.at(0).id).toInt()));
+	cbAspectRatio->setCurrentIndex(cbAspectRatio->findData(s->value("Video/AspectRatio", mAspectRatio.at(0).id).toInt()));
 	cbWireframeFilter->setCurrentIndex(cbWireframeFilter->findData(s->value("Video/Wireframe", mWireframe.at(0).id).toInt()));
 	cbMeshModeFilter->setCurrentIndex(cbMeshModeFilter->findData(s->value("Video/MeshMode", mMeshMode.at(0).id).toInt()));
 	cbBandingModeFilter->setCurrentIndex(cbBandingModeFilter->findData(s->value("Video/BandingMode", mBandingMode.at(0).id).toInt()));
@@ -718,7 +718,7 @@ void UISettings::loadSettings()
 	leCartridge->setText( s->value(getCartridgePathSettingsKey()).toString() );
 	leCartridgeModemIP->setText( s->value( "Cartridge/ModemIP", QString("127.0.0.1") ).toString() );
 	leCartridgeModemPort->setText( s->value( "Cartridge/ModemPort", QString("1337") ).toString() );
-  cbSTVGame->setCurrentIndex( cbSTVGame->findData( s->value( "Cartridge/STVGame" ).toString() ) );
+	cbSTVGame->setCurrentIndex( cbSTVGame->findData( s->value( "Cartridge/STVGame" ).toString() ) );
 	leMemory->setText( s->value( "Memory/Path", getDataDirPath().append( "/bkram.bin" ) ).toString() );
 	leMpegROM->setText( s->value( "MpegROM/Path" ).toString() );
 	checkBox_extended_internal_backup->setChecked(s->value("Memory/ExtendMemory").toBool());

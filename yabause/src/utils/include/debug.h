@@ -56,8 +56,10 @@ extern "C"{
 //#define DEBUG 1
 #ifdef DEBUG
 #define LOG(...) DebugPrintf(MainLog, __FILE__, __LINE__, __VA_ARGS__)
+#define LOGS(...) DebugPrintf(MainLog, NULL, 0, __VA_ARGS__)
 #else
 #define LOG(...)
+#define LOGS(...)
 #endif
 
   //#define CDDEBUG 1

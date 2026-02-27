@@ -82,7 +82,7 @@ UIYabause::UIYabause( QWidget* parent )
 	: QMainWindow( parent )
 {
 	mInit = false;
-   search.clear();
+ 	search.clear();
 	searchType = 0;
 	mNeedResize = false;
 	mLocker = NULL;
@@ -207,12 +207,23 @@ UIYabause::~UIYabause()
 	mCanLog = false;
 }
 
+void qAppendLog( const char* s )
+{
+	UIYabause *ui = QtYabause::mainWindow( false );
+	if(ui){
+		ui->appendLog( s );
+	}else{
+		qWarning( "%s", s );
+	}
+}
+
 void UIYabause::showEvent( QShowEvent* e )
 {
 	QMainWindow::showEvent( e );
 
-	if ( !mInit )
-	{
+	if ( !mInit ) {
+		LogStart(DEBUG_CALLBACK, (char*)qAppendLog);
+
 		VolatileSettings* vs = QtYabause::volatileSettings();
 
 		aEmulationVSync->setChecked( vs->value( "General/EnableVSync", 1 ).toBool() );
@@ -231,6 +242,8 @@ void UIYabause::closeEvent( QCloseEvent* e )
 	Settings* vs = QtYabause::settings();
 	vs->setValue( "General/Geometry", saveGeometry() );
 	vs->sync();
+
+	LogStop();
 
 	QMainWindow::closeEvent( e );
 }

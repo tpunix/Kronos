@@ -49,7 +49,7 @@ extern "C"{
 
   extern Debug * MainLog;
 
-  void LogStart(void);
+  void LogStart(DebugOutType t, char * s);
   void LogStop(void);
   void LogChangeOutput(DebugOutType t, char * s);
 

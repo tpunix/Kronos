@@ -144,83 +144,93 @@ extern "C"
 
 #ifdef WIN32
 #ifndef vasprintf
-		int vasprintf(char **strp, const char *fmt, va_list ap) {
-			int len = 512;
-			char *str = (char*)malloc((size_t)len);
-			int r = vsnprintf_s(str, len, _TRUNCATE, fmt, ap); /* "secure" version of vsprintf */
-			if (r == -1) return free(str), -1;
-			*strp = str;
-			return r;
-		}
+int vasprintf(char **strp, const char *fmt, va_list ap)
+{
+	int len = 512;
+	char *str = (char*)malloc((size_t)len);
+	int r = vsnprintf_s(str, len, _TRUNCATE, fmt, ap); /* "secure" version of vsprintf */
+	if (r == -1)
+		return free(str), -1;
+	*strp = str;
+	return r;
+}
 #endif
-        void YuiMsg(const char *format, ...) {
-          int r;
-	  char *str=NULL;
-          va_list arglist;
-          va_start( arglist, format );
-          r = vasprintf(&str, format, arglist);
-	  va_end( arglist );
-	  if (r > 0) {
-            //QtYabause::mainWindow()->appendLog( str );
-		  wchar_t wtext[512];
-		  mbstowcs(wtext, str, strlen(str) + 1);//Plus null
-		  LPWSTR ptr = wtext;
-		    ::OutputDebugString(ptr);
-			if (mUIYabause) mUIYabause->appendLog( str );
-	      free(str);
-	  }
-       }
+void YuiMsg(const char *format, ...)
+{
+	int r;
+	char *str=NULL;
+	va_list arglist;
+
+	va_start( arglist, format );
+	r = vasprintf(&str, format, arglist);
+	va_end( arglist );
+
+	if (r > 0) {
+		//QtYabause::mainWindow()->appendLog( str );
+		wchar_t wtext[512];
+		mbstowcs(wtext, str, strlen(str) + 1);//Plus null
+		LPWSTR ptr = wtext;
+		::OutputDebugString(ptr);
+		if (mUIYabause)
+			mUIYabause->appendLog( str );
+		free(str);
+	}
+}
 #else
-	void YuiMsg(const char *format, ...) {
-		char dest[512];
-		va_list argptr;
-		va_start(argptr, format);
-		vsnprintf(dest, 512, format, argptr);
-		va_end(argptr);
-		printf("%s", dest);
-		fflush(stdout);
-		if (mUIYabause) mUIYabause->appendLog( dest );
+void YuiMsg(const char *format, ...)
+{
+	char dest[512];
+	va_list argptr;
+
+	va_start(argptr, format);
+	vsnprintf(dest, 512, format, argptr);
+	va_end(argptr);
+
+	printf("%s", dest);
+	fflush(stdout);
+	if (mUIYabause)
+		mUIYabause->appendLog( dest );
 }
 
 #endif
 
-       void YuiErrorMsg(const char *error_text)
-       {
-				 emit mUIYabause->mYabauseThread->error( error_text, false );
-         YuiMsg("Error: %s\n", error_text);
-       }
+void YuiErrorMsg(const char *error_text)
+{
+	emit mUIYabause->mYabauseThread->error( error_text, false );
+	YuiMsg("Error: %s\n", error_text);
+}
 
-  void YuiEndOfFrame()
-	{
+void YuiEndOfFrame()
+{
+}
 
-	}
-	void YuiSwapBuffers()
-	{
-          QtYabause::mainWindow()->swapBuffers();
-        }
+void YuiSwapBuffers()
+{
+	QtYabause::mainWindow()->swapBuffers();
+}
 
-	int YuiGetFB()
-	{
-          return 0;
-        }
+int YuiGetFB()
+{
+	return 0;
+}
 
 #if defined(HAVE_DIRECTINPUT) || defined(HAVE_DIRECTSOUND)
-	HWND DXGetWindow()
-	{
-		return (HWND)mUIYabause->winId();
-	}
+HWND DXGetWindow()
+{
+	return (HWND)mUIYabause->winId();
+}
 #endif
 }
 
 void QtYabause::appendLog( const char* str )
 {
 #ifdef _WIN32
-  wchar_t wtext[512];
-  mbstowcs(wtext, str, strlen(str) + 1);//Plus null
-  LPWSTR ptr = wtext;
+	wchar_t wtext[512];
+	mbstowcs(wtext, str, strlen(str) + 1);//Plus null
+	LPWSTR ptr = wtext;
 	::OutputDebugString(ptr);
 #else
-  printf("%s\n", str);
+	printf("%s\n", str);
 #endif
 	mUIYabause->appendLog(str);
 }
@@ -228,30 +238,31 @@ void QtYabause::appendLog( const char* str )
 
 UIYabause* QtYabause::mainWindow( bool create )
 {
-        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+	qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
 	if ( !mUIYabause && create )
 		mUIYabause = new UIYabause;
 	return mUIYabause;
 }
 
-void QtYabause::updateTitle() {
-VolatileSettings* vs = QtYabause::volatileSettings();
-QString name;
-if (vs->value( "Cartridge/Type", 0 ).toInt() == CART_ROMSTV) { //STV ROM
-	name = QString("STV: %1").arg(vs->value("Cartridge/STVGameName").toString());
-} else {
-	QString filename = vs->value("General/CdRomISO").toString();
-	if (filename != NULL) {
-		QString core = QString("CDROM: %1");
-		if (vs->value( "General/CdRom", CDCORE_ISO ).toInt() == CDCORE_ISO) {
-			core = QString("ISO: %1");
-		}
-		QFileInfo fi(filename);
-		if (fi.exists()) {
-			name = core.arg(fi.fileName());
+void QtYabause::updateTitle()
+{
+	VolatileSettings* vs = QtYabause::volatileSettings();
+	QString name;
+	if (vs->value( "Cartridge/Type", 0 ).toInt() == CART_ROMSTV) { //STV ROM
+		name = QString("STV: %1").arg(vs->value("Cartridge/STVGameName").toString());
+	} else {
+		QString filename = vs->value("General/CdRomISO").toString();
+		if (filename != NULL) {
+			QString core = QString("CDROM: %1");
+			if (vs->value( "General/CdRom", CDCORE_ISO ).toInt() == CDCORE_ISO) {
+				core = QString("ISO: %1");
+			}
+			QFileInfo fi(filename);
+			if (fi.exists()) {
+				name = core.arg(fi.fileName());
+			}
 		}
 	}
-}
 
 	QString title( "Kronos v%1" );
 	title=title.arg( VERSION );

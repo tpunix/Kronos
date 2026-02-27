@@ -2241,7 +2241,7 @@ DEBUGWIP("Init\n");
        ErrorHandle("glUseProgram");
 
 		if (VRAMNeedAnUpdate != 0) {
-			LOG("VRAM Update %x\n", VRAMNeedAnUpdate);
+			//LOG("VRAM Update %x\n", VRAMNeedAnUpdate);
 			u32 start = 0;
 			u32 size = 0;
 			switch (VRAMNeedAnUpdate) {

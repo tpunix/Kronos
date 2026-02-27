@@ -496,7 +496,7 @@ void UIHexEditorWnd::keyPressEdit(QKeyEvent *event, u64 posAddr)
       if (!textEdit)
       {
          for (u64 idx = getSelectionStart(); idx < getSelectionEnd(); idx++)
-            result.append(QString("%1").arg(readByte(idx), 2, 16, QChar('0')).toUpper());
+            result.append(QString("%1").arg((uint)readByte(idx), 2, 16, QChar('0')).toUpper());
       }
       else
       {

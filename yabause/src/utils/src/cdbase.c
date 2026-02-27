@@ -1589,6 +1589,8 @@ static int ISOCDInit(const char * iso) {
    memset(&disc, 0, sizeof(disc));
    iso_cd_status = 0;
 
+   LOG("ISOCDInit: %s\n", iso);
+
    if (!iso)
       return -1;
 

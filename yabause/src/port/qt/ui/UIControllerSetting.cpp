@@ -159,7 +159,7 @@ void UIControllerSetting::loadPadSettings()
 {
 	Settings* settings = QtYabause::settings();
 
-	foreach ( const u8& name, mNames.keys() )
+	foreach ( const uint& name, mNames.keys() )
 	{
 		mPadKey = name;
 		const QString settingsKey = QString( UIPortManager::mSettingsKey )

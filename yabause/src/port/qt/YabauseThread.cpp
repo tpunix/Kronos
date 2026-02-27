@@ -17,7 +17,7 @@
 	You should have received a copy of the GNU General Public License
 	along with Yabause; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-*/
+	*/
 #include "YabauseThread.h"
 #include "Settings.h"
 #include "VolatileSettings.h"
@@ -87,7 +87,7 @@ bool YabauseThread::pauseEmulation( bool pause, bool reset )
 		ScspMuteAudio(SCSP_MUTE_SYSTEM);
 	}
 	else {
-    resetSyncVideo();
+		resetSyncVideo();
 		ScspUnMuteAudio(SCSP_MUTE_SYSTEM);
 	}
 
@@ -146,144 +146,144 @@ void YabauseThread::reloadControllers()
 			uint type = settings->value( QString( UIPortManager::mSettingsType ).arg( port ).arg( id ) ).toUInt();
 			switch ( type )
 			{
-                                case PERCABINET:
-                                {
-                                  PerCab_struct* padbits = PerCabAdd( NULL );
-                                  settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
-                                  QStringList padKeys = settings->childKeys();
-				  settings->endGroup();
-				  padKeys.sort();
-                                  foreach ( const QString& padKey, padKeys )
-				  {
-				    const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( padKey ) ).toString();
-				    PerSetKey( key.toUInt(), padKey.toUInt(), padbits );
-				  }
-                                  break;
-                                }
+				case PERCABINET:
+					{
+						PerCab_struct* padbits = PerCabAdd( NULL );
+						settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
+						QStringList padKeys = settings->childKeys();
+						settings->endGroup();
+						padKeys.sort();
+						foreach ( const QString& padKey, padKeys )
+						{
+							const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( padKey ) ).toString();
+							PerSetKey( key.toUInt(), padKey.toUInt(), padbits );
+						}
+						break;
+					}
 				case PERPAD:
-				{
-					PerPad_struct* padbits = PerPadAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
-
-					settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
-					QStringList padKeys = settings->childKeys();
-					settings->endGroup();
-
-					padKeys.sort();
-					foreach ( const QString& padKey, padKeys )
 					{
-						const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( padKey ) ).toString();
+						PerPad_struct* padbits = PerPadAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
 
-						PerSetKey( key.toUInt(), padKey.toUInt(), padbits );
+						settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
+						QStringList padKeys = settings->childKeys();
+						settings->endGroup();
+
+						padKeys.sort();
+						foreach ( const QString& padKey, padKeys )
+						{
+							const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( padKey ) ).toString();
+
+							PerSetKey( key.toUInt(), padKey.toUInt(), padbits );
+						}
+						break;
 					}
-					break;
-				}
 				case PERWHEEL:
-            {
-               PerAnalog_struct* analogbits = PerWheelAdd(port == 1 ? &PORTDATA1 : &PORTDATA2);
+					{
+						PerAnalog_struct* analogbits = PerWheelAdd(port == 1 ? &PORTDATA1 : &PORTDATA2);
 
-               settings->beginGroup(QString("Input/Port/%1/Id/%2/Controller/%3/Key").arg(port).arg(id).arg(type));
-               QStringList analogKeys = settings->childKeys();
-               settings->endGroup();
+						settings->beginGroup(QString("Input/Port/%1/Id/%2/Controller/%3/Key").arg(port).arg(id).arg(type));
+						QStringList analogKeys = settings->childKeys();
+						settings->endGroup();
 
-               analogKeys.sort();
-               foreach(const QString& analogKey, analogKeys)
-               {
-                  const QString key = settings->value(QString(UIPortManager::mSettingsKey).arg(port).arg(id).arg(type).arg(analogKey)).toString();
+						analogKeys.sort();
+						foreach(const QString& analogKey, analogKeys)
+						{
+							const QString key = settings->value(QString(UIPortManager::mSettingsKey).arg(port).arg(id).arg(type).arg(analogKey)).toString();
 
-                  PerSetKey(key.toUInt(), analogKey.toUInt(), analogbits);
-               }
-               break;
-            }
-            case PERMISSIONSTICK:
-            {
-               PerAnalog_struct* analogbits = PerMissionStickAdd(port == 1 ? &PORTDATA1 : &PORTDATA2);
+							PerSetKey(key.toUInt(), analogKey.toUInt(), analogbits);
+						}
+						break;
+					}
+				case PERMISSIONSTICK:
+					{
+						PerAnalog_struct* analogbits = PerMissionStickAdd(port == 1 ? &PORTDATA1 : &PORTDATA2);
 
-               settings->beginGroup(QString("Input/Port/%1/Id/%2/Controller/%3/Key").arg(port).arg(id).arg(type));
-               QStringList analogKeys = settings->childKeys();
-               settings->endGroup();
+						settings->beginGroup(QString("Input/Port/%1/Id/%2/Controller/%3/Key").arg(port).arg(id).arg(type));
+						QStringList analogKeys = settings->childKeys();
+						settings->endGroup();
 
-               analogKeys.sort();
-               foreach(const QString& analogKey, analogKeys)
-               {
-                  const QString key = settings->value(QString(UIPortManager::mSettingsKey).arg(port).arg(id).arg(type).arg(analogKey)).toString();
+						analogKeys.sort();
+						foreach(const QString& analogKey, analogKeys)
+						{
+							const QString key = settings->value(QString(UIPortManager::mSettingsKey).arg(port).arg(id).arg(type).arg(analogKey)).toString();
 
-                  PerSetKey(key.toUInt(), analogKey.toUInt(), analogbits);
-               }
-               break;
-            }
-            case PERTWINSTICKS:
-            {
-               PerAnalog_struct* analogbits = PerTwinSticksAdd(port == 1 ? &PORTDATA1 : &PORTDATA2);
+							PerSetKey(key.toUInt(), analogKey.toUInt(), analogbits);
+						}
+						break;
+					}
+				case PERTWINSTICKS:
+					{
+						PerAnalog_struct* analogbits = PerTwinSticksAdd(port == 1 ? &PORTDATA1 : &PORTDATA2);
 
-               settings->beginGroup(QString("Input/Port/%1/Id/%2/Controller/%3/Key").arg(port).arg(id).arg(type));
-               QStringList analogKeys = settings->childKeys();
-               settings->endGroup();
+						settings->beginGroup(QString("Input/Port/%1/Id/%2/Controller/%3/Key").arg(port).arg(id).arg(type));
+						QStringList analogKeys = settings->childKeys();
+						settings->endGroup();
 
-               analogKeys.sort();
-               foreach(const QString& analogKey, analogKeys)
-               {
-                  const QString key = settings->value(QString(UIPortManager::mSettingsKey).arg(port).arg(id).arg(type).arg(analogKey)).toString();
+						analogKeys.sort();
+						foreach(const QString& analogKey, analogKeys)
+						{
+							const QString key = settings->value(QString(UIPortManager::mSettingsKey).arg(port).arg(id).arg(type).arg(analogKey)).toString();
 
-                  PerSetKey(key.toUInt(), analogKey.toUInt(), analogbits);
-               }
-               break;
-            }
+							PerSetKey(key.toUInt(), analogKey.toUInt(), analogbits);
+						}
+						break;
+					}
 				case PER3DPAD:
-				{
-					PerAnalog_struct* analogbits = Per3DPadAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
-
-					settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
-					QStringList analogKeys = settings->childKeys();
-					settings->endGroup();
-
-					analogKeys.sort();
-					foreach ( const QString& analogKey, analogKeys )
 					{
-						const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( analogKey ) ).toString();
+						PerAnalog_struct* analogbits = Per3DPadAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
 
-						PerSetKey( key.toUInt(), analogKey.toUInt(), analogbits );
+						settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
+						QStringList analogKeys = settings->childKeys();
+						settings->endGroup();
+
+						analogKeys.sort();
+						foreach ( const QString& analogKey, analogKeys )
+						{
+							const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( analogKey ) ).toString();
+
+							PerSetKey( key.toUInt(), analogKey.toUInt(), analogbits );
+						}
+						break;
 					}
-					break;
-				}
 				case PERGUN:
-				{
-					PerGun_struct* gunbits = PerGunAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
-					settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
-					QStringList gunKeys = settings->childKeys();
-					settings->endGroup();
-
-					gunKeys.sort();
-					foreach ( const QString& gunKey, gunKeys )
 					{
-						const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( gunKey ) ).toString();
+						PerGun_struct* gunbits = PerGunAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
+						settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
+						QStringList gunKeys = settings->childKeys();
+						settings->endGroup();
 
-						PerSetKey( key.toUInt(), gunKey.toUInt(), gunbits );
+						gunKeys.sort();
+						foreach ( const QString& gunKey, gunKeys )
+						{
+							const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( gunKey ) ).toString();
+
+							PerSetKey( key.toUInt(), gunKey.toUInt(), gunbits );
+						}
+						emit toggleEmulateMouse( true, true );
+						break;
 					}
-					emit toggleEmulateMouse( true, true );
-					break;
-				}
 				case PERKEYBOARD:
 					QtYabause::appendLog( "Keyboard controller type is not yet supported" );
 					break;
 				case PERMOUSE:
-				{
-					PerMouse_struct* mousebits = PerMouseAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
-
-					settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
-					QStringList mouseKeys = settings->childKeys();
-					settings->endGroup();
-
-					mouseKeys.sort();
-					foreach ( const QString& mouseKey, mouseKeys )
 					{
-						const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( mouseKey ) ).toString();
+						PerMouse_struct* mousebits = PerMouseAdd( port == 1 ? &PORTDATA1 : &PORTDATA2 );
 
-						PerSetKey( key.toUInt(), mouseKey.toUInt(), mousebits );
+						settings->beginGroup( QString( "Input/Port/%1/Id/%2/Controller/%3/Key" ).arg( port ).arg( id ).arg( type ) );
+						QStringList mouseKeys = settings->childKeys();
+						settings->endGroup();
+
+						mouseKeys.sort();
+						foreach ( const QString& mouseKey, mouseKeys )
+						{
+							const QString key = settings->value( QString( UIPortManager::mSettingsKey ).arg( port ).arg( id ).arg( type ).arg( mouseKey ) ).toString();
+
+							PerSetKey( key.toUInt(), mouseKey.toUInt(), mousebits );
+						}
+
+						emit toggleEmulateMouse( true, false );
+						break;
 					}
-
-					emit toggleEmulateMouse( true, false );
-					break;
-				}
 				case 0:
 					// Unconnected
 					break;
@@ -476,7 +476,7 @@ void YabauseThread::resetYabauseConf()
 	mYabauseConf.buppath = 0;
 	mYabauseConf.mpegpath = 0;
 	mYabauseConf.cartpath = 0;
-  mYabauseConf.stvgame = 0;
+	mYabauseConf.stvgame = 0;
 	mYabauseConf.skip_load = 0;
 	int numThreads = QThread::idealThreadCount();
 	mYabauseConf.usethreads = numThreads <= 1 ? 0 : 1;
@@ -484,6 +484,6 @@ void YabauseThread::resetYabauseConf()
 	mYabauseConf.video_filter_type = 0;
 	mYabauseConf.video_upscale_type = 0;
 	mYabauseConf.polygon_generation_mode = 0;
-        mYabauseConf.resolution_mode = 1;
-        mYabauseConf.stretch = 0;
+	mYabauseConf.resolution_mode = 1;
+	mYabauseConf.stretch = 0;
 }

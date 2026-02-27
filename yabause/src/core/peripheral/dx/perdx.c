@@ -500,7 +500,7 @@ void PollKeys(void)
 		{
 			XINPUT_STATE state;
 			ZeroMemory( &state, sizeof(XINPUT_STATE) );
-			if (XInputGetState(dev_list[i].user_index, &state) != ERROR_DEVICE_NOT_CONNECTED)
+			if (XInputGetState(dev_list[i].user_index, &state) == ERROR_DEVICE_NOT_CONNECTED)
 				continue;
 
 			// Handle axis			
@@ -702,7 +702,7 @@ u32 PERDXScan(u32 flags)
 		{
 			XINPUT_STATE state;
 			ZeroMemory( &state, sizeof(XINPUT_STATE) );
-			if (XInputGetState(dev_list[i].user_index, &state) != ERROR_DEVICE_NOT_CONNECTED)
+			if (XInputGetState(dev_list[i].user_index, &state) == ERROR_DEVICE_NOT_CONNECTED)
 				continue;
 
 			// Handle axis		
@@ -935,3 +935,4 @@ void PERDXFlush(void)
 }
 
 //////////////////////////////////////////////////////////////////////////////
+

@@ -42,12 +42,12 @@ protected:
 	PerInterface_struct* mCore;
 	uint mPort;
 	uint mPad;
-	u8 mPadKey;
+	uint mPadKey;
 	uint mPerType;
 	QTimer* mTimer;
-	QMap<QToolButton*, u8> mButtons;
-	QMap<u8, QString> mNames;
-	QMap<u8, u32> mScanMasks;
+	QMap<QToolButton*, uint> mButtons;
+	QMap<uint, QString> mNames;
+	QMap<uint, u32> mScanMasks;
 	QLabel *mlInfos;
 	u32 scanFlags;
 	QToolButton * curTb;

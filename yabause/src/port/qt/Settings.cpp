@@ -31,20 +31,7 @@ QString Settings::mProgramVersion;
 
 QString getDataDirPath()
 {
-#if defined Q_OS_WIN
-	// Use some wizardry so we can get our data in AppData
-   QString oldApplicationName = QCoreApplication::applicationName();   
-   QCoreApplication::setApplicationName("kronos");
-#if QT_VERSION >= 0x04FF00
-   QString path = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
-#else
-	QString path = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-#endif
-   QCoreApplication::setApplicationName(oldApplicationName);
-	return path;
-#else
 	return QApplication::applicationDirPath();
-#endif
 }
 
 QString getIniFile( const QString& s )

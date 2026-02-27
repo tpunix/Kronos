@@ -861,9 +861,9 @@ void ScuSetAddValue(scudmainfo_struct * dmainfo) {
     }
   }
 
-  LOG("DoDMA src=%08X,dst=%08X,size=%d, ra:%d/wa:%d flame=%d:%d\n",
-    dmainfo->ReadAddress, dmainfo->WriteAddress, dmainfo->TransferNumber,
-    dmainfo->ReadAdd, dmainfo->WriteAdd, yabsys.frame_count, yabsys.LineCount);
+//	LOG("DoDMA src=%08X,dst=%08X,size=%d, ra:%d/wa:%d flame=%d:%d\n",
+//			dmainfo->ReadAddress, dmainfo->WriteAddress, dmainfo->TransferNumber,
+//			dmainfo->ReadAdd, dmainfo->WriteAdd, yabsys.frame_count, yabsys.LineCount);
 
 }
 
@@ -1722,7 +1722,7 @@ static void ScuDspExec(u32 timing) {
                         ScuSendDSPEnd();
                      }
 
-                     LOG("dsp has ended\n");
+                     //LOG("dsp has ended\n");
                      ScuDsp->ProgControlPort.part.P = ScuDsp->PC+1;
                      dsp_counter = 1;
                      break;
@@ -2173,7 +2173,7 @@ void ScuDspDisasm(u8 addr, char *outstring) {
                      break;
                }
 
-               LOG("DMA Add = %X, addressAdd = %d", (instruction >> 15) & 0x7, addressAdd);
+               //LOG("DMA Add = %X, addressAdd = %d", (instruction >> 15) & 0x7, addressAdd);
 
                // Write Command name
                sprintf(outstring, "DMA");
@@ -2664,8 +2664,8 @@ void FASTCALL ScuWriteWord(SH2_struct *sh, u8* mem, u32 addr, UNUSED u16 val) {
 
 void FASTCALL ScuWriteLong(SH2_struct *sh, u8* mem, u32 addr, u32 val) {
    addr &= 0xFF;
-  LOG("scu: write %08X:%08X\n", addr, val);
-   switch(addr) {
+  //LOG("scu: write %08X:%08X\n", addr, val);
+  switch(addr) {
       case 0:
          ScuRegs->D0R = val;
          break;
@@ -2775,13 +2775,13 @@ void FASTCALL ScuWriteLong(SH2_struct *sh, u8* mem, u32 addr, u32 val) {
         ScuRegs->DSTA = val;
         break;
       case 0x80: // DSP Program Control Port
-         LOG("scu: wrote %08X to DSP Program Control Port", val);
+         //LOG("scu: wrote %08X to DSP Program Control Port", val);
          ScuDsp->ProgControlPort.all = (ScuDsp->ProgControlPort.all & 0x00FC0000) | (val & 0x060380FF);
 
          if (ScuDsp->ProgControlPort.part.LE) {
             // set pc
             ScuDsp->PC = (u8)ScuDsp->ProgControlPort.part.P;
-            LOG("scu: DSP set pc = %02X", ScuDsp->PC);
+            //LOG("scu: DSP set pc = %02X", ScuDsp->PC);
          }
 
          // Execution is rquested
@@ -2791,8 +2791,8 @@ void FASTCALL ScuWriteLong(SH2_struct *sh, u8* mem, u32 addr, u32 val) {
          }
 
 #ifdef DEBUG
-         if (ScuDsp->ProgControlPort.part.EX)
-            LOG("scu: DSP executing: PC = %02X", ScuDsp->PC);
+         //if (ScuDsp->ProgControlPort.part.EX)
+         //   LOG("scu: DSP executing: PC = %02X", ScuDsp->PC);
 #endif
          break;
       case 0x84: // DSP Program Ram Data Port

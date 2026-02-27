@@ -82,15 +82,15 @@ set(kronos_HEADERS
 	sys/bios/include/bios.h
 	sys/vdp1/include/vdp1.h
 	sys/vdp2/include/vdp2.h
-  sys/vdp2/include/vdp2debug.h
+	sys/vdp2/include/vdp2debug.h
 	sys/sh2/include/sh2core.h
-  sys/sh2/include/sh2iasm.h
-  sys/sh2/include/sh2d.h
-  sys/sh2/include/sh-opc.h
+	sys/sh2/include/sh2iasm.h
+	sys/sh2/include/sh2d.h
+	sys/sh2/include/sh-opc.h
 	sys/scu/include/scu.h
 	sys/scsp/include/scsp.h
 	sys/scsp/include/scspdsp.h
-  sys/scsp/include/m68kd.h
+	sys/scsp/include/m68kd.h
 	sys/smpc/include/smpc.h
 	sys/memory/include/memory.h
 	sys/memory/include/cs0.h
@@ -98,26 +98,27 @@ set(kronos_HEADERS
 	sys/memory/include/cs2.h
 	sys/memory/include/eeprom.h
 	sys/memory/include/decrypt.h
-  core/osd/include/osdcore.h
-  core/osd/include/font.h
-  core/m68k/m68kcore.h
+	core/osd/include/osdcore.h
+	core/osd/include/font.h
+	core/m68k/m68kcore.h
 	core/video/opengl/common/include/vidshared.h
 	core/video/opengl/common/include/ygl.h
 	core/peripheral/common/peripheral.h
 	core/net/sock.h
-  ctrl/include/core.h
-  ctrl/include/yabause.h
-  ctrl/include/movie.h
-  ctrl/include/yui.h
+	ctrl/include/core.h
+	ctrl/include/yabause.h
+	ctrl/include/movie.h
+	ctrl/include/yui.h
 	ctrl/threads/threads.h
-  utils/include/error.h
+	utils/include/error.h
 	utils/include/cdbase.h
-  utils/include/profile.h
-  utils/include/netlink.h
-  utils/include/cheat.h
-  utils/include/db.h
-  utils/include/gameinfo.h
-  utils/include/japmodem.h
+	utils/include/profile.h
+	utils/include/netlink.h
+	utils/include/cheat.h
+	utils/include/db.h
+	utils/include/debug.h
+	utils/include/gameinfo.h
+	utils/include/japmodem.h
 	tools/junzip/junzip.h
 )
 
@@ -135,8 +136,8 @@ endif (CMAKE_COMPILER_IS_GNUCC)
 
 set(kronos_SOURCES
 	${kronos_SOURCES}
-  utils/src/cheat.c
-  utils/src/db.c
+	utils/src/cheat.c
+	utils/src/db.c
 	utils/src/gameinfo.c
 	utils/src/japmodem.c
 	core/m68k/m68kcore.c
@@ -148,12 +149,12 @@ set(kronos_SOURCES
 	sys/vdp1/src/vdp1.c
 	sys/vdp2/src/vdp2.c
 	sys/sh2/src/sh2core.c
-  sys/sh2/src/sh2iasm.c
-  sys/sh2/src/sh2d.c
+	sys/sh2/src/sh2iasm.c
+	sys/sh2/src/sh2d.c
 	sys/scu/src/scu.c
 	sys/scsp/src/scsp.c
 	sys/scsp/src/scspdsp.c
-  sys/scsp/src/m68kd.c
+	sys/scsp/src/m68kd.c
 	sys/smpc/src/smpc.c
 	sys/memory/src/memory.c
 	sys/memory/src/cs0.c
@@ -165,9 +166,10 @@ set(kronos_SOURCES
 	core/peripheral/common/peripheral.c
 	core/sound/dummy/snddummy.c
 	ctrl/src/yabause.c
-  ctrl/src/stv.c
-  ctrl/src/movie.c
+	ctrl/src/stv.c
+	ctrl/src/movie.c
 	utils/src/error.c
+	utils/src/debug.c
 	utils/src/cdbase.c
 	tools/junzip/junzip.c
 	)

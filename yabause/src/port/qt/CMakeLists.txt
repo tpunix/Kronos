@@ -89,7 +89,7 @@ set( kronos_qt_MOC_HEADERS
 	ui/UIPortManager.h
 	ui/UIControllerSetting.h
 	ui/UIPadSetting.h
-        ui/UISTVSetting.h
+	ui/UISTVSetting.h
 	ui/UI3DControlPadSetting.h
     ui/UIWheelSetting.h
     ui/UIMissionStickSetting.h
@@ -135,7 +135,7 @@ set( kronos_qt_SOURCES
 	ui/UIPortManager.cpp
 	ui/UIControllerSetting.cpp
 	ui/UIPadSetting.cpp
-        ui/UISTVSetting.cpp
+	ui/UISTVSetting.cpp
 	ui/UI3DControlPadSetting.cpp
     ui/UIWheelSetting.cpp
     ui/UIMissionStickSetting.cpp

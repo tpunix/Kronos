@@ -89,6 +89,16 @@ UIYabause::UIYabause( QWidget* parent )
 
 	// setup dialog
 	setupUi( this );
+
+    // 合并 Run / Pause 菜单项为单一切换项
+    // 把 Run 文本改为 "Run/Pause"，隐藏原先的 Pause 动作，并给 Run 动作设置 F1 和 F2 两个快捷键（保持兼容）
+	aEmulationRun->setText( QtYabause::translate("Run/Pause") );
+	aEmulationRun->setToolTip( aEmulationRun->text() );
+	aEmulationRun->setStatusTip( aEmulationRun->text() );
+	// 隐藏原来的 Pause 菜单项（保留对象以便回退）
+	if (aEmulationPause)
+		aEmulationPause->setVisible(false);
+
 	toolBar->insertAction( aFileSettings, mFileSaveState->menuAction() );
 	toolBar->insertAction( aFileSettings, mFileLoadState->menuAction() );
 	toolBar->insertSeparator( aFileSettings );
@@ -965,17 +975,24 @@ void UIYabause::on_aFileQuit_triggered()
 void UIYabause::on_aEmulationRun_triggered()
 {
 	mYabauseThread->initEmulation();
+
+	// 如果当前处于暂停状态 -> 继续运行；否则暂停
 	if ( mYabauseThread->emulationPaused() )
 	{
+		LOG("Pause -> Run\n");
 		mYabauseThread->pauseEmulation( false, false );
 		refreshStatesActions();
 		if (isFullScreen())
 			hideMouseTimer->start(3 * 1000);
+	} else {
+		LOG("Run -> Pause\n");
+		mYabauseThread->pauseEmulation( true, false );
 	}
 }
 
 void UIYabause::on_aEmulationPause_triggered()
 {
+	LOG("Pause: %d\n", mYabauseThread->emulationPaused());
 	if ( !mYabauseThread->emulationPaused() )
 		mYabauseThread->pauseEmulation( true, false );
 }
@@ -1228,10 +1245,14 @@ void UIYabause::on_cbVideoDriver_currentIndexChanged( int id )
 
 void UIYabause::pause( bool paused )
 {
+	LOG("UIYabause::pause  %d\n", paused);
 	mYabauseGL->pause(paused);
 
-	aEmulationRun->setEnabled( paused );
-	aEmulationPause->setEnabled( !paused );
+	//QWidget* ab = toolBar->widgetForAction( aSound );
+	aEmulationRun->setIcon( QIcon( paused ? ":/actions/icons/actions/play.png" : ":/actions/icons/actions/pause.png" ) );
+
+	//aEmulationRun->setEnabled( paused );
+	//aEmulationPause->setEnabled( !paused );
 	aEmulationReset->setEnabled( !paused );
 }
 

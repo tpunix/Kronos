@@ -87,7 +87,6 @@ protected slots:
    void on_pbStepOver_clicked();
    void on_pbStepOut_clicked();
    void on_pbMemoryTransfer_clicked();
-   void on_pbMemoryEditor_clicked();
 
    void on_pbReserved1_clicked();
    void on_pbReserved2_clicked();

@@ -31,6 +31,12 @@ UIDebugCPU::UIDebugCPU( PROCTYPE proc, YabauseThread *mYabauseThread, QWidget* p
 	if ( p && !p->isFullScreen() )
 		setWindowFlags( Qt::Sheet | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint );
 
+	if (mYabauseThread->init() < 0) {
+		saMemoryEditor->setEnabled(false);
+	} else {
+		saMemoryEditor->setFocus();
+	}
+
 	// Disable unimplemented functions
 	gbBackTrace->setVisible( false );
 	pbStepOver->setVisible( false );
@@ -268,11 +274,6 @@ void UIDebugCPU::on_pbStepOut_clicked()
 void UIDebugCPU::on_pbMemoryTransfer_clicked()
 {
 	UIMemoryTransfer( NULL, this ).exec();
-}
-
-void UIDebugCPU::on_pbMemoryEditor_clicked()
-{
-	UIMemoryEditor( context, mYabauseThread, this ).exec();
 }
 
 void UIDebugCPU::on_pbReserved1_clicked()

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1503</width>
+    <width>1200</width>
     <height>672</height>
    </rect>
   </property>
@@ -29,7 +29,7 @@
        </property>
        <property name="maximumSize">
         <size>
-         <width>350</width>
+         <width>160</width>
          <height>16777215</height>
         </size>
        </property>
@@ -47,7 +47,7 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>120</width>
+            <width>80</width>
             <height>0</height>
            </size>
           </property>
@@ -73,8 +73,8 @@
            <widget class="UIDisasm" name="lwDisassembledCode" native="true">
             <property name="minimumSize">
              <size>
-              <width>416</width>
-              <height>0</height>
+              <width>240</width>
+              <height>200</height>
              </size>
             </property>
             <property name="font">
@@ -531,6 +531,44 @@
          </item>
         </layout>
        </widget>
+
+	   <widget class="QWidget" name="codePanel">
+        <attribute name="title">
+         <string>Memory</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_17">
+         <item>
+		 
+			<widget class="UIHexEditor" name="saMemoryEditor" native="true">
+				<property name="sizePolicy">
+					<sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+						<horstretch>0</horstretch>
+						<verstretch>0</verstretch>
+					</sizepolicy>
+				</property>
+				<property name="minimumSize">
+					<size>
+						<width>0</width>
+						<height>0</height>
+					</size>
+				</property>
+				<property name="font">
+					<font>
+						<family>Courier New</family>
+						<pointsize>9</pointsize>
+					</font>
+				</property>
+				<property name="focusPolicy">
+					<enum>Qt::StrongFocus</enum>
+				</property>
+				<property name="acceptDrops">
+					<bool>false</bool>
+				</property>
+			</widget>
+          </item>
+        </layout>
+       </widget>
+
        <widget class="QWidget" name="codePanel">
         <attribute name="title">
          <string>Code</string>
@@ -548,6 +586,7 @@
          </item>
         </layout>
        </widget>
+
       </widget>
      </item>
     </layout>
@@ -579,13 +618,6 @@
       <widget class="QPushButton" name="pbMemoryTransfer">
        <property name="text">
         <string>Memory Transfer</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pbMemoryEditor">
-       <property name="text">
-        <string>Memory Editor</string>
        </property>
       </widget>
      </item>

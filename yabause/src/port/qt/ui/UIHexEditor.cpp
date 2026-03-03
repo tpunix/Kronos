@@ -26,18 +26,26 @@
 
 UIHexEditor::UIHexEditor( QWidget* p )
 {
+	setStyleSheet(
+	    "QTabBar::tab {"
+	    "  min-width: 50px;" /* 每个标签最少 50 像素宽 */
+	    "  max-width: 60px;" /* 每个标签最多 60 像素宽 */
+		"  padding: 2px;"    /* 文字离边框的距离 */
+	    "}"
+	);
+
    QList<QString> tabList;
    QList<u32> startList;
    QList<u32> endList;
-   tabList   << "All"      << "BIOS"     << "LWRAM"    << "HWRAM"     <<
-                "CS0"      << "CS1"      << "CS2"      << "68K RAM"   <<
-                "VDP1 RAM" << "VDP1 FB"  << "VDP2 RAM" << "VDP2 CRAM";
+   tabList << "All"     << "BIOS"   << "LWRAM"   << "HWRAM"    <<
+              "VDP1RAM" << "VDP1FB" << "VDP2RAM" << "VDP2CRAM" <<
+              "68KRAM"  << "CS0"    << "CS1"     << "CS2"      ;
    startList << 0x00000000 << 0x00000000 << 0x00200000 << 0x06000000 <<
-                0x02000000 << 0x04000000 << 0x05800000 << 0x05A00000 <<
-                0x05C00000 << 0x05C80000 << 0x05E00000 << 0x05F00000;
+                0x05C00000 << 0x05C80000 << 0x05E00000 << 0x05F00000 <<
+                0x05A00000 << 0x02000000 << 0x04000000 << 0x05800000 ;
    endList   << 0x07FFFFFF << 0x0017FFFF << 0x002FFFFF << 0x060FFFFF <<
-                0x03FFFFFF << 0x04FFFFFF << 0x058FFFFF << 0x05AFFFFF <<
-                0x05C7FFFF << 0x05CFFFFF << 0x05EFFFFF << 0x05F7FFFF;
+                0x05C7FFFF << 0x05CFFFFF << 0x05EFFFFF << 0x05F7FFFF <<
+                0x05AFFFFF << 0x03FFFFFF << 0x04FFFFFF << 0x058FFFFF ;
    for (int i=0; i < tabList.count(); i++)
    {
       UIHexEditorWnd *hexEditorWnd = new UIHexEditorWnd (this);
@@ -46,6 +54,7 @@ UIHexEditor::UIHexEditor( QWidget* p )
       addTab(hexEditorWnd, tabList[i]);
    }
    setTabPosition(QTabWidget::South);
+   setCurrentIndex(0);
 }
 
 void UIHexEditor::goToAddress( u32 address, bool setCursor )

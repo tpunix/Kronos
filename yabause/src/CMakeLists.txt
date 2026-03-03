@@ -569,6 +569,8 @@ ExternalProject_Add(m68kmake
     CMAKE_GENERATOR "${CMAKE_GENERATOR}"
     INSTALL_COMMAND ""
     BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/core/m68k/musashi
+	# built in Debug configuration. VS2022 generat wrong code in release configuration.
+	BUILD_COMMAND ${CMAKE_COMMAND} --build . --config Debug
 )
 
 include_directories(

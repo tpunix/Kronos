@@ -21,6 +21,7 @@
 #include "UIHexInput.h"
 #include "UIMemoryEditor.h"
 #include "UIMemoryTransfer.h"
+#include "Settings.h"
 #include "../CommonDialogs.h"
 
 UIDebugCPU::UIDebugCPU( PROCTYPE proc, YabauseThread *mYabauseThread, QWidget* p )
@@ -36,6 +37,9 @@ UIDebugCPU::UIDebugCPU( PROCTYPE proc, YabauseThread *mYabauseThread, QWidget* p
 	} else {
 		saMemoryEditor->setFocus();
 	}
+	pbGoto->setShortcut(QKeySequence("Ctrl+G"));
+	pbSaveTab->setShortcut(QKeySequence("Ctrl+S"));
+	pbSearch->setShortcut(QKeySequence("Ctrl+F"));
 
 	// Disable unimplemented functions
 	gbBackTrace->setVisible( false );
@@ -275,6 +279,35 @@ void UIDebugCPU::on_pbMemoryTransfer_clicked()
 {
 	UIMemoryTransfer( NULL, this ).exec();
 }
+
+void UIDebugCPU::on_pbGoto_clicked()
+{
+	u32 gotoAddress = 0;
+
+	UIHexInput hex(gotoAddress, 4, this);
+	if (hex.exec() == QDialog::Accepted)
+	{
+		gotoAddress = hex.getValue();
+		saMemoryEditor->goToAddress(gotoAddress);
+		saMemoryEditor->setFocus();
+	}
+}
+
+void UIDebugCPU::on_pbSaveTab_clicked()
+{
+	QString fn = CommonDialogs::getSaveFileName(getDataDirPath(),
+			QtYabause::translate("Choose a location for binary file"),
+			QtYabause::translate("Binary Files (*.bin)"));
+
+	if (!fn.isEmpty())
+		saMemoryEditor->saveTab(fn);
+}
+
+void UIDebugCPU::on_pbSearch_clicked()
+{
+}
+
+
 
 void UIDebugCPU::on_pbReserved1_clicked()
 {

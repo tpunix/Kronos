@@ -28,28 +28,38 @@ class HexValidator : public QValidator
    Q_OBJECT
 private:
    unsigned int t, b;
+   int seq;
 public:
    explicit HexValidator(QObject *parent = 0);
-   HexValidator(unsigned int top, unsigned int bottom, QObject *parent = 0)
+   HexValidator(unsigned int top, unsigned int bottom, QObject *parent=0, int do_seq=0)
    {
       //QValidator(parent);
       t = top;
       b = bottom;
+	  seq = do_seq;
    }
+
    virtual void fixup(QString &input) const {
       input = input.toUpper();
    }
    virtual State validate ( QString & input, int & pos ) const
    {
-      QRegExp rxHex("[0-9A-Fa-f]{1,8}");
+      QRegExp rxHex("[0-9A-Fa-f, ]*");
 
       fixup(input);
 
       if (input.isEmpty())
          return Acceptable;
-
       if (!rxHex.exactMatch(input))
          return Invalid;
+	  if (input.contains(' ')) {
+		  if(seq==0)
+	         return Invalid;
+         return Acceptable;
+	  }
+
+      if(input.size()>8)
+          return Invalid;
 
       // Make sure it's in range
       bool *result = new bool;

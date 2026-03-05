@@ -398,6 +398,7 @@ extern "C" {
   typedef struct {
     u32 addr;
     u32 val;
+	u32 type;
   } result_struct;
 
 #define SEARCHBYTE              0

@@ -102,11 +102,6 @@ HANDLE hFMWrite = INVALID_HANDLE_VALUE;
 HANDLE hFile = INVALID_HANDLE_VALUE;
 void * YabMemMap(char * filename, u32 size ) {
 
-  struct stat sb;
-  off_t len;
-  char *p;
-  int fd;
-
   hFile = CreateFileA(
     filename,
     GENERIC_READ|GENERIC_WRITE,
@@ -124,7 +119,7 @@ void * YabMemMap(char * filename, u32 size ) {
     return NULL;
   }
 
-  hFMWrite = CreateFileMapping(
+  hFMWrite = CreateFileMappingA(
     hFile,
     NULL,
     PAGE_READWRITE,
@@ -1193,7 +1188,7 @@ int MappedMemoryLoad(SH2_struct *sh, const char *filename, u32 addr)
    FILE *fp;
    long filesize;
    u8 *buffer;
-   u32 i;
+   int i;
    size_t num_read = 0;
 
    if (!filename)
@@ -1365,7 +1360,6 @@ static u8 header[16] = {
 
 int CheckBackupFile(FILE *fp) {
   int i, i2;
-  u32 i3;
 
   // Fill in header
   for (i2 = 0; i2 < 4; i2++) {
@@ -1437,11 +1431,11 @@ void FormatBackupRam(u8 *mem, u32 size)
 
 static int MemStateCurrentOffset = 0;
 
-void MemStateWrite(void * ptr, size_t size, size_t nmemb, void ** stream)
+void MemStateWrite(void * ptr, int size, size_t nmemb, void ** stream)
 {
    if (stream != NULL)
       memcpy((char *)(*stream) + MemStateCurrentOffset, ptr, size*nmemb);
-   MemStateCurrentOffset += size*nmemb;
+   MemStateCurrentOffset += size*(int)nmemb;
 }
 
 void MemStateWriteOffset(void * ptr, size_t size, size_t nmemb, void ** stream, int offset)
@@ -1469,7 +1463,7 @@ int MemStateFinishHeader(void ** stream, int offset)
 void MemStateRead(void * ptr, size_t size, size_t nmemb, const void * stream)
 {
    memcpy(ptr, (const char *)stream + MemStateCurrentOffset, size*nmemb);
-   MemStateCurrentOffset += size*nmemb;
+   MemStateCurrentOffset += (int)size*(int)nmemb;
 }
 
 void MemStateReadOffset(void * ptr, size_t size, size_t nmemb, const void * stream, int offset)
@@ -2003,6 +1997,7 @@ static int MappedMemoryAddMatch(u32 addr, u32 val, int searchtype, result_struct
 {
    result[numresults[0]].addr = addr;
    result[numresults[0]].val = val;
+   result[numresults[0]].type = searchtype;
    numresults[0]++;
    return 0;
 }
@@ -2045,26 +2040,29 @@ static int SearchString(u32 startaddr, u32 endaddr, int searchtype,
                         const char *searchstr, result_struct *results,
                         u32 *maxresults)
 {
-   u8 *buf=NULL;
    u32 *buf32=NULL;
-   u32 buflen=0;
+   int buflen=0;
    u32 counter;
    u32 addr;
    u32 numresults=0;
+   int base = 0;
 
    buflen=(u32)strlen(searchstr);
 
    if ((buf32=(u32 *)malloc(buflen*sizeof(u32))) == NULL)
       return 0;
 
-   buf = (u8 *)buf32;
 
    // Copy string to buffer
    switch (searchtype & 0x70)
    {
       case SEARCHSTRING:
-         strcpy((char *)buf, searchstr);
+		 for(int i=0; i<buflen; i++){
+			 buf32[i] = (u8)searchstr[i];
+		 }
          break;
+      case SEARCHHEX:
+		 base = 16;
       case SEARCHREL8BIT:
       case SEARCHREL16BIT:
       {
@@ -2075,7 +2073,7 @@ static int SearchString(u32 startaddr, u32 endaddr, int searchtype,
          buflen = 0;
          for (text=strtok((char *)searchtext, " ,"); text != NULL; text=strtok(NULL, " ,"))
          {
-            buf32[buflen] = strtoul(text, NULL, 0);
+            buf32[buflen] = strtoul(text, NULL, base);
             buflen++;
          }
          free(searchtext);
@@ -2093,11 +2091,12 @@ static int SearchString(u32 startaddr, u32 endaddr, int searchtype,
       switch (searchtype & 0x70)
       {
          case SEARCHSTRING:
+         case SEARCHHEX:
          {
             u8 val = DMAMappedMemoryReadByte(addr);
             addr++;
 
-            if (val == buf[counter])
+            if (val == buf32[counter])
             {
                counter++;
                if (counter == buflen)
@@ -2110,7 +2109,7 @@ static int SearchString(u32 startaddr, u32 endaddr, int searchtype,
          case SEARCHREL8BIT:
          {
             int diff;
-            u32 j;
+            int j;
             u8 val2;
             u8 val = DMAMappedMemoryReadByte(addr);
 
@@ -2139,7 +2138,7 @@ static int SearchString(u32 startaddr, u32 endaddr, int searchtype,
          case SEARCHREL16BIT:
          {
             int diff;
-            u32 j;
+            int j;
             u16 val2;
             u16 val = DMAMappedMemoryReadWord(addr);
 
@@ -2170,7 +2169,7 @@ static int SearchString(u32 startaddr, u32 endaddr, int searchtype,
          break;
    }
 
-   free(buf);
+   free(buf32);
    maxresults[0] = numresults;
    return 1;
 }
@@ -2198,8 +2197,7 @@ result_struct *MappedMemorySearch(u32 startaddr, u32 endaddr, int searchtype,
       case SEARCHREL16BIT:
       {
          // String/8-bit relative/16-bit relative search(not supported, yet)
-         if (SearchString(startaddr, endaddr,  searchtype, searchstr,
-                          results, maxresults) == 0)
+         if (SearchString(startaddr, endaddr,  searchtype, searchstr, results, maxresults) == 0)
          {
             maxresults[0] = 0;
             free(results);
@@ -2209,6 +2207,22 @@ result_struct *MappedMemorySearch(u32 startaddr, u32 endaddr, int searchtype,
          return results;
       }
       case SEARCHHEX:
+	     if(strchr(searchstr, ' ')){
+	         if (SearchString(startaddr, endaddr,  searchtype, searchstr, results, maxresults) == 0) {
+	            maxresults[0] = 0;
+    	        free(results);
+        	    return NULL;
+	         }
+	         return results;
+		 }
+         int len = (int)strlen(searchstr);
+         if(len>4)
+             searchtype |= SEARCHLONG;
+         else if(len>2)
+             searchtype |= SEARCHWORD;
+         else
+			 searchtype |= SEARCHBYTE;
+
          sscanf(searchstr, "%08lx", &searchval);
          break;
       case SEARCHUNSIGNED:

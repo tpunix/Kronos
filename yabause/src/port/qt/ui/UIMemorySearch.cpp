@@ -71,6 +71,8 @@ void UIMemorySearch::setParameters(int type, QString string, u32 startAddress, u
    leValue->setText(string);
    leStartAddress->setText(QString("%1").arg(startAddress, 8, 16, QChar('0')).toUpper());
    leEndAddress->setText(QString("%1").arg(endAddress, 8, 16, QChar('0')).toUpper());
+
+   leValue->setFocus();
 }
 
 void UIMemorySearch::adjustSearchValueQValidator()
@@ -85,7 +87,7 @@ void UIMemorySearch::adjustSearchValueQValidator()
    switch (data)
    {
       case SEARCHHEX:
-         leValue->setValidator(new HexValidator(0x00000000, 0xFFFFFFFF, leValue));
+         leValue->setValidator(new HexValidator(0x00000000, 0xFFFFFFFF, leValue, 1));
          leValue->setText("");
          break;
       case SEARCHSTRING:

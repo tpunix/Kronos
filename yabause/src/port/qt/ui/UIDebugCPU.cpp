@@ -21,6 +21,8 @@
 #include "UIHexInput.h"
 #include "UIMemoryEditor.h"
 #include "UIMemoryTransfer.h"
+#include "UIMemorySearch.h"
+#include <QShortcut>
 #include "Settings.h"
 #include "../CommonDialogs.h"
 
@@ -40,6 +42,22 @@ UIDebugCPU::UIDebugCPU( PROCTYPE proc, YabauseThread *mYabauseThread, QWidget* p
 	pbGoto->setShortcut(QKeySequence("Ctrl+G"));
 	pbSaveTab->setShortcut(QKeySequence("Ctrl+S"));
 	pbSearch->setShortcut(QKeySequence("Ctrl+F"));
+
+	QShortcut* qsSearchNext = new QShortcut(QKeySequence(Qt::Key_F3), this);
+	connect(qsSearchNext, &QShortcut::activated, this, &UIDebugCPU::on_SearchNext);
+
+	QShortcut* qsStepOver = new QShortcut(QKeySequence(Qt::Key_F10), this);
+	connect(qsStepOver, &QShortcut::activated, this, &UIDebugCPU::on_pbStepOver_clicked);
+	QShortcut* qsStepInto = new QShortcut(QKeySequence(Qt::Key_F11), this);
+	connect(qsStepInto, &QShortcut::activated, this, &UIDebugCPU::on_pbStepInto_clicked);
+	QShortcut* qsStepOut = new QShortcut(QKeySequence(Qt::Key_F12), this);
+	connect(qsStepOut, &QShortcut::activated, this, &UIDebugCPU::on_pbStepOut_clicked);
+
+	searchType = SEARCHHEX;
+	searchStartAddr = 0;
+	searchEndAddr = 0;
+	searchString = QString("");
+
 
 	// Disable unimplemented functions
 	gbBackTrace->setVisible( false );
@@ -305,9 +323,60 @@ void UIDebugCPU::on_pbSaveTab_clicked()
 
 void UIDebugCPU::on_pbSearch_clicked()
 {
+	result_struct *results;
+	u32 numResults=1;
+
+	UIMemorySearch memorySearch( this );
+
+	UIHexEditorWnd *hexEditorWnd = (UIHexEditorWnd *)saMemoryEditor->currentWidget();
+	searchTabIndex  = saMemoryEditor->currentIndex();
+	searchStartAddr = hexEditorWnd->getStartAddress();
+	searchEndAddr   = hexEditorWnd->getEndAddress();
+	memorySearch.setParameters(searchType, QString(""), searchStartAddr, searchEndAddr);
+
+	if (memorySearch.exec() == QDialog::Accepted) {
+		bool ok;
+		searchType      = memorySearch.cbType->itemData(memorySearch.cbType->currentIndex()).toInt();
+		searchString    = memorySearch.leValue->text();
+		searchStartAddr = memorySearch.leStartAddress->text().toUInt(&ok, 16);
+		searchEndAddr   = memorySearch.leEndAddress->text().toUInt(&ok, 16);
+
+	 	results = MappedMemorySearch(searchStartAddr, searchEndAddr, searchType | SEARCHEXACT,
+									 searchString.toLatin1().constData(), NULL, &numResults);
+		if (results && numResults>0){
+			saMemoryEditor->goToAddress(results[0].addr);
+			searchStartAddr = results[0].addr + (1<<(results[0].type&0x03));
+			free(results);
+		}else{
+			CommonDialogs::error("No matches found.");
+		}
+	}
 }
 
+void UIDebugCPU::on_SearchNext()
+{
+	if(searchTabIndex != saMemoryEditor->currentIndex()){
+		// If user changed tab since last search, reset search parameters
+		UIHexEditorWnd* hexEditorWnd = (UIHexEditorWnd*)saMemoryEditor->currentWidget();
+		searchTabIndex = saMemoryEditor->currentIndex();
+		searchStartAddr = hexEditorWnd->getStartAddress();
+		searchEndAddr = hexEditorWnd->getEndAddress();
+	}
 
+	if (searchEndAddr > searchStartAddr) {
+		result_struct* results;
+		u32 numResults = 1;
+		results = MappedMemorySearch(searchStartAddr, searchEndAddr, searchType | SEARCHEXACT,
+			searchString.toLatin1().constData(), NULL, &numResults);
+		if (results && numResults > 0) {
+			saMemoryEditor->goToAddress(results[0].addr);
+			searchStartAddr = results[0].addr + (1 << (results[0].type & 0x03));
+			free(results);
+			return;
+		}
+	}
+	CommonDialogs::error("No more matches found.");
+}
 
 void UIDebugCPU::on_pbReserved1_clicked()
 {

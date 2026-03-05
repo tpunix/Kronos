@@ -21,21 +21,19 @@
 UIHexInput::UIHexInput( u32 value, int size, QWidget* p )
 	: QDialog( p )
 {
-   char format[5];
-
 	// setup dialog
 	setupUi( this );
 
-   // Setup Text control
-   QString text = QString("%1").arg(value, size*2, 16, QChar('0'));
+	// Setup Text control
+	QString text = QString("%1").arg(value, size*2, 16, QChar('0'));
 
 	this->value = value;
 	this->size = size;
 
 	leValue->setValidator(new HexValidator(0x00000000, 0xFFFFFFFF >> ((4 - size) * 8), leValue));
-  leValue->setText(text);
-  leValue->setSelection(0, text.size());
-  leValue->setFocus();
+  	leValue->setText(text);
+  	leValue->setSelection(0, text.size());
+	leValue->setFocus();
 
 	// retranslate widgets
 	QtYabause::retranslateWidget( this );
@@ -43,11 +41,11 @@ UIHexInput::UIHexInput( u32 value, int size, QWidget* p )
 
 u32 UIHexInput::getValue()
 {
-   return value;
+	return value;
 }
 
 void UIHexInput::accept()
 {
-   value = leValue->text().toUInt(0, 16);
+	value = leValue->text().toUInt(0, 16);
 	QDialog::accept();
 }

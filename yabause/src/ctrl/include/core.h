@@ -144,7 +144,7 @@ extern "C" {
 
 #endif // !GEKKO
 
-  void MemStateWrite(void * ptr, size_t size, size_t nmemb, void ** stream);
+  void MemStateWrite(void * ptr, int size, size_t nmemb, void ** stream);
   void MemStateWriteOffset(void * ptr, size_t size, size_t nmemb, void ** stream, int offset);
   int MemStateWriteHeader(void ** stream, const char *name, int version);
   int MemStateFinishHeader(void ** stream, int offset);

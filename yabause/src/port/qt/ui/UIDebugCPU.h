@@ -58,6 +58,14 @@ public:
    int exec() override;
    void done(int) override;
 
+private:
+   u32 searchType;
+   u32 searchStartAddr;
+   u32 searchEndAddr;
+   u32 searchTabIndex;
+   QString searchString;
+
+
 protected:
    YabauseThread *mYabauseThread;
    enum PROCTYPE context;
@@ -91,6 +99,7 @@ protected slots:
    void on_pbSaveTab_clicked();
    void on_pbGoto_clicked();
    void on_pbSearch_clicked();
+   void on_SearchNext();
 
    void on_pbReserved1_clicked();
    void on_pbReserved2_clicked();

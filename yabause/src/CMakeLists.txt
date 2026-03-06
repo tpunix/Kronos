@@ -39,34 +39,27 @@ endif()
 endif(GIT_FOUND)
 endif (KRONOS_LINUX_USE_PERFETTO)
 
-include_directories(sys/bios/include)
-include_directories(sys/vdp1/include)
-include_directories(sys/vdp2/include)
-include_directories(sys/sh2/include)
-include_directories(sys/scu/include)
-include_directories(sys/scsp/include)
-include_directories(sys/smpc/include)
-include_directories(sys/memory/include)
-include_directories(utils/include)
-include_directories(core/video/opengl/core/include)
-include_directories(core/video/opengl/compute_shader/include)
-include_directories(core/video/opengl/common/include)
+include_directories(sys/bios)
+include_directories(sys/vdp1)
+include_directories(sys/vdp2)
+include_directories(sys/sh2)
+include_directories(sys/scu)
+include_directories(sys/scsp)
+include_directories(sys/smpc)
+include_directories(sys/memory)
+include_directories(utils)
+include_directories(core/video/opengl/core)
+include_directories(core/video/opengl/compute_shader)
+include_directories(core/video/opengl/common)
 include_directories(core/video/soft)
-include_directories(core/sh2/sh2_kronos/include)
-include_directories(core/peripheral/mac)
-include_directories(core/peripheral/linux)
-include_directories(core/peripheral/sdl)
-include_directories(core/peripheral/common)
+include_directories(core/sh2/sh2_kronos)
+include_directories(core/peripheral)
 include_directories(core/net)
-include_directories(core/net/linux)
-include_directories(core/net/windows)
-include_directories(core/net/dummy)
-include_directories(core/sound/al)
-include_directories(core/sound/sdl)
-include_directories(ctrl/include)
+include_directories(core/sound)
+include_directories(ctrl)
 include_directories(ctrl/threads)
 include_directories(tools/junzip)
-include_directories(core/osd/include)
+include_directories(core/osd)
 include_directories(core/m68k)
 
 cmake_minimum_required(VERSION 3.12)
@@ -79,46 +72,46 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/CMakeTests)
 
 set(kronos_HEADERS
 	${kronos_HEADERS}
-	sys/bios/include/bios.h
-	sys/vdp1/include/vdp1.h
-	sys/vdp2/include/vdp2.h
-	sys/vdp2/include/vdp2debug.h
-	sys/sh2/include/sh2core.h
-	sys/sh2/include/sh2iasm.h
-	sys/sh2/include/sh2d.h
-	sys/sh2/include/sh-opc.h
-	sys/scu/include/scu.h
-	sys/scsp/include/scsp.h
-	sys/scsp/include/scspdsp.h
-	sys/scsp/include/m68kd.h
-	sys/smpc/include/smpc.h
-	sys/memory/include/memory.h
-	sys/memory/include/cs0.h
-	sys/memory/include/cs1.h
-	sys/memory/include/cs2.h
-	sys/memory/include/eeprom.h
-	sys/memory/include/decrypt.h
-	core/osd/include/osdcore.h
-	core/osd/include/font.h
+	sys/bios/bios.h
+	sys/vdp1/vdp1.h
+	sys/vdp2/vdp2.h
+	sys/vdp2/vdp2debug.h
+	sys/sh2/sh2core.h
+	sys/sh2/sh2iasm.h
+	sys/sh2/sh2d.h
+	sys/sh2/sh-opc.h
+	sys/scu/scu.h
+	sys/scsp/scsp.h
+	sys/scsp/scspdsp.h
+	sys/scsp/m68kd.h
+	sys/smpc/smpc.h
+	sys/memory/memory.h
+	sys/memory/cs0.h
+	sys/memory/cs1.h
+	sys/memory/cs2.h
+	sys/memory/eeprom.h
+	sys/memory/decrypt.h
+	core/osd/osdcore.h
+	core/osd/font.h
 	core/m68k/m68kcore.h
-	core/video/opengl/common/include/vidshared.h
-	core/video/opengl/common/include/ygl.h
-	core/peripheral/common/peripheral.h
+	core/video/opengl/common/vidshared.h
+	core/video/opengl/common/ygl.h
+	core/peripheral/peripheral.h
 	core/net/sock.h
-	ctrl/include/core.h
-	ctrl/include/yabause.h
-	ctrl/include/movie.h
-	ctrl/include/yui.h
+	ctrl/core.h
+	ctrl/yabause.h
+	ctrl/movie.h
+	ctrl/yui.h
 	ctrl/threads/threads.h
-	utils/include/error.h
-	utils/include/cdbase.h
-	utils/include/profile.h
-	utils/include/netlink.h
-	utils/include/cheat.h
-	utils/include/db.h
-	utils/include/debug.h
-	utils/include/gameinfo.h
-	utils/include/japmodem.h
+	utils/error.h
+	utils/cdbase.h
+	utils/profile.h
+	utils/netlink.h
+	utils/cheat.h
+	utils/db.h
+	utils/debug.h
+	utils/gameinfo.h
+	utils/japmodem.h
 	tools/junzip/junzip.h
 )
 
@@ -136,41 +129,41 @@ endif (CMAKE_COMPILER_IS_GNUCC)
 
 set(kronos_SOURCES
 	${kronos_SOURCES}
-	utils/src/cheat.c
-	utils/src/db.c
-	utils/src/gameinfo.c
-	utils/src/japmodem.c
+	utils/cheat.c
+	utils/db.c
+	utils/gameinfo.c
+	utils/japmodem.c
 	core/m68k/m68kcore.c
-	utils/src/netlink.c
-	core/osd/src/osdcore.c
-	utils/src/profile.c
-	sys/vdp2/src/vdp2debug.c
-	sys/bios/src/bios.c
-	sys/vdp1/src/vdp1.c
-	sys/vdp2/src/vdp2.c
-	sys/sh2/src/sh2core.c
-	sys/sh2/src/sh2iasm.c
-	sys/sh2/src/sh2d.c
-	sys/scu/src/scu.c
-	sys/scsp/src/scsp.c
-	sys/scsp/src/scspdsp.c
-	sys/scsp/src/m68kd.c
-	sys/smpc/src/smpc.c
-	sys/memory/src/memory.c
-	sys/memory/src/cs0.c
-	sys/memory/src/cs1.c
-	sys/memory/src/cs2.c
-	sys/memory/src/eeprom.c
-	sys/memory/src/decrypt.c
-	core/video/opengl/common/src/vidshared.c
-	core/peripheral/common/peripheral.c
-	core/sound/dummy/snddummy.c
-	ctrl/src/yabause.c
-	ctrl/src/stv.c
-	ctrl/src/movie.c
-	utils/src/error.c
-	utils/src/debug.c
-	utils/src/cdbase.c
+	utils/netlink.c
+	core/osd/osdcore.c
+	utils/profile.c
+	sys/vdp2/vdp2debug.c
+	sys/bios/bios.c
+	sys/vdp1/vdp1.c
+	sys/vdp2/vdp2.c
+	sys/sh2/sh2core.c
+	sys/sh2/sh2iasm.c
+	sys/sh2/sh2d.c
+	sys/scu/scu.c
+	sys/scsp/scsp.c
+	sys/scsp/scspdsp.c
+	sys/scsp/m68kd.c
+	sys/smpc/smpc.c
+	sys/memory/memory.c
+	sys/memory/cs0.c
+	sys/memory/cs1.c
+	sys/memory/cs2.c
+	sys/memory/eeprom.c
+	sys/memory/decrypt.c
+	core/video/opengl/common/vidshared.c
+	core/peripheral/peripheral.c
+	core/sound/snddummy.c
+	ctrl/yabause.c
+	ctrl/stv.c
+	ctrl/movie.c
+	utils/error.c
+	utils/debug.c
+	utils/cdbase.c
 	tools/junzip/junzip.c
 	)
 add_definitions(-DIMPROVED_SAVESTATES)
@@ -202,8 +195,8 @@ include(${CMAKE_SOURCE_DIR}/l10n/CMakeLists.txt)
 #-------------------------------------------------------
 set(kronos_SOURCES
 	${kronos_SOURCES}
-	core/sh2/sh2_kronos/src/sh2int.c
-	core/sh2/sh2_kronos/src/sh2_opcodes.c
+	core/sh2/sh2_kronos/sh2int.c
+	core/sh2/sh2_kronos/sh2_opcodes.c
 )
 
 if (MSVC)
@@ -339,11 +332,11 @@ if (YAB_WANT_OPENGL)
 	if (NOT YAB_FORCE_GLES31)
 		include(FindOpenGL)
 	endif (NOT YAB_FORCE_GLES31)
-  include(FindOpenGLES)
+	include(FindOpenGLES)
 	include(FindEGL)
 
 	if (OPENGL_FOUND)
-	  message(STATUS "OPENGL Core supported")
+		message(STATUS "OPENGL Core supported")
 		add_definitions(-D_OGL3_)
 		SET( NEED_GLEW "YES")
 		SET( OPENGL_CURRENT_LIBRARIES ${OPENGL_LIBRARIES} )
@@ -353,7 +346,7 @@ if (YAB_WANT_OPENGL)
 		  if (NOT EGL_FOUND)
 				message(ERROR "No EGL found")
 			endif (NOT EGL_FOUND)
-		  message(STATUS "OPENGL ES 3.1 supported")
+			message(STATUS "OPENGL ES 3.1 supported")
 			add_definitions(-D_OGLES31_)
 			SET( OPENGL_CURRENT_LIBRARIES ${OPENGLES_LIBRARIES} ${EGL_LIBRARIES} )
 			SET( OPENGL_SUPPORTED "YES" )
@@ -362,7 +355,7 @@ if (YAB_WANT_OPENGL)
 				if (NOT EGL_FOUND)
 					message(ERROR "No EGL found")
 				endif (NOT EGL_FOUND)
-		  	message(STATUS "OPENGL ES 3.0 supported")
+				message(STATUS "OPENGL ES 3.0 supported")
 				SET( NEED_GLEW "YES")
 				SET( OPENGL_CURRENT_LIBRARIES ${OPENGLES_LIBRARIES} ${EGL_LIBRARIES} )
 				SET( OPENGL_SUPPORTED "YES" )
@@ -404,22 +397,22 @@ if (YAB_WANT_OPENGL)
 		endif (NEED_GLEW)
 		set(kronos_SOURCES
 				${kronos_SOURCES}
-			core/video/opengl/common/src/commongl.c
-			core/video/opengl/core/src/yglcache.c
-			core/video/opengl/common/src/ogl_shader.c
-			core/video/opengl/common/src/rbg_compute.cpp
-			core/video/opengl/common/src/common_glshader.c
-			core/video/opengl/common/src/upscale_shader.c
-			core/video/opengl/compute_shader/src/yglcs.c
-			core/video/opengl/compute_shader/src/vidcs.c
-			core/video/opengl/compute_shader/src/vdp1_compute.c
+			core/video/opengl/common/commongl.c
+			core/video/opengl/core/yglcache.c
+			core/video/opengl/common/ogl_shader.c
+			core/video/opengl/common/rbg_compute.cpp
+			core/video/opengl/common/common_glshader.c
+			core/video/opengl/common/upscale_shader.c
+			core/video/opengl/compute_shader/yglcs.c
+			core/video/opengl/compute_shader/vidcs.c
+			core/video/opengl/compute_shader/vdp1_compute.c
 		)
 		set(kronos_HEADERS
 			${kronos_HEADERS}
-			core/video/opengl/common/include/common_glshader.h
-			core/video/opengl/compute_shader/include/vidcs.h
-			core/video/opengl/compute_shader/include/vdp1_compute.h
-			core/video/opengl/compute_shader/include/vdp1_prog_compute.h
+			core/video/opengl/common/common_glshader.h
+			core/video/opengl/compute_shader/vidcs.h
+			core/video/opengl/compute_shader/vdp1_compute.h
+			core/video/opengl/compute_shader/vdp1_prog_compute.h
 		)
 	endif(OPENGL_SUPPORTED)
 endif ()
@@ -445,8 +438,8 @@ if (YAB_WANT_SDL)
 
 	if (SDL_FOUND OR SDL2_FOUND)
 		add_definitions(-DHAVE_LIBSDL=1)
-		set(kronos_SOURCES ${kronos_SOURCES} core/peripheral/sdl/persdljoy.c core/sound/sdl/sndsdl.c)
-		set(kronos_HEADERS ${kronos_HEADERS} core/peripheral/sdl/persdljoy.h core/sound/sdl/sndsdl.h)
+		set(kronos_SOURCES ${kronos_SOURCES} core/peripheral/persdljoy.c core/sound/sndsdl.c)
+		set(kronos_HEADERS ${kronos_HEADERS} core/peripheral/persdljoy.h core/sound/sndsdl.h)
 	endif()
 endif()
 
@@ -464,20 +457,18 @@ if (WIN32)
 
 				if (YAB_WANT_DIRECTINPUT AND DirectX_INPUT8_LIBRARY)
 					add_definitions(-DHAVE_DIRECTINPUT)
-					set(kronos_SOURCES ${kronos_SOURCES} core/peripheral/dx/perdx.c)
-					set(kronos_HEADERS ${kronos_HEADERS} core/peripheral/dx/perdx.h)
+					set(kronos_SOURCES ${kronos_SOURCES} core/peripheral/perdx.c)
+					set(kronos_HEADERS ${kronos_HEADERS} core/peripheral/perdx.h)
 					set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} ${DirectX_INPUT8_LIBRARY})
 					add_definitions(-DHAVE_XINPUT)
 					set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} ${DirectX_XINPUT_LIBRARY} wbemuuid)
-					include_directories(core/peripheral/dx/)
 				endif()
 
 				if (YAB_WANT_DIRECTSOUND AND DirectX_SOUND_LIBRARY)
 					add_definitions(-DHAVE_DIRECTSOUND)
-					set(kronos_SOURCES ${kronos_SOURCES} core/sound/dx/snddx.c)
-					set(kronos_HEADERS ${kronos_HEADERS} core/sound/dx/snddx.h)
+					set(kronos_SOURCES ${kronos_SOURCES} core/sound/snddx.c)
+					set(kronos_HEADERS ${kronos_HEADERS} core/sound/snddx.h)
 					set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} ${DirectX_SOUND_LIBRARY})
-					include_directories(core/sound/dx/)
 				endif()
 			endif()
 		endif()
@@ -491,8 +482,8 @@ if (YAB_WANT_OPENAL)
 	if (OPENAL_FOUND)
 		add_definitions(-DHAVE_LIBAL=1)
 		include_directories(${OPENAL_INCLUDE_DIR})
-		set(kronos_SOURCES ${kronos_SOURCES} core/sound/al/sndal.c)
-		set(kronos_HEADERS ${kronos_HEADERS} core/sound/al/sndal.h)
+		set(kronos_SOURCES ${kronos_SOURCES} core/sound/sndal.c)
+		set(kronos_HEADERS ${kronos_HEADERS} core/sound/sndal.h)
 		set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} ${OPENAL_LIBRARY})
 	endif (OPENAL_FOUND)
 endif (YAB_WANT_OPENAL)
@@ -538,7 +529,7 @@ if (WIN32)
 		endif (ntddcdrm_INCLUDE_DIR)
 	endif(YAB_WANT_DDK)
 
-	set(kronos_SOURCES ${kronos_SOURCES} core/cd/windows/cd-windows.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/cd/cd-windows.c)
 
 	if (YAB_USE_SCSPMIDI)
 		set(KRONOS_LIBRARIES ${KRONOS_LIBRARIES} winmm)
@@ -637,20 +628,20 @@ endif()
 # Yabause Arch
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	add_definitions(-DARCH_IS_MACOSX=1)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/dummy/sock-dummy.c ctrl/threads/thr-linux.c  ctrl/threads/linux/pthread_barrier.c )
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/sock-dummy.c ctrl/threads/thr-linux.c  ctrl/threads/linux/pthread_barrier.c )
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 	add_definitions(-DARCH_IS_FREEBSD=1)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/dummy/sock-dummy.c ctrl/threads/thr-dummy.c core/cd/freebsd/cd-freebsd.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/sock-dummy.c ctrl/threads/thr-dummy.c core/cd/cd-freebsd.c)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR ${CMAKE_SYSTEM_NAME} MATCHES "Android" )
 	add_definitions(-DARCH_IS_LINUX=1)
 	#add_definitions(-DYAB_ASYNC_RENDERING)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/linux/sock-linux.c ctrl/threads/thr-linux.c core/cd/linux/cd-linux.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/linux/sock-linux.c ctrl/threads/thr-linux.c core/cd/cd-linux.c)
 
 	if (${CMAKE_SYSTEM_NAME} MATCHES "Linux" )
 		check_include_file("linux/joystick.h" LINUX_HAS_JOYSTICK)
 		if (LINUX_HAS_JOYSTICK)
-			set(kronos_SOURCES ${kronos_SOURCES} core/peripheral/linux/perlinuxjoy.c)
-			set(kronos_HEADERS ${kronos_HEADERS} core/peripheral/linux/perlinuxjoy.h)
+			set(kronos_SOURCES ${kronos_SOURCES} core/peripheral/perlinuxjoy.c)
+			set(kronos_HEADERS ${kronos_HEADERS} core/peripheral/perlinuxjoy.h)
 		endif()
 
 		check_c_source_compiles("
@@ -663,16 +654,16 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR ${CMAKE_SYSTEM_NAME} MATCHES "An
 	endif()
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
 	add_definitions(-DARCH_IS_NETBSD=1)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/dummy/sock-dummy.c ctrl/threads/thr-dummy.c core/cd/netbsd/cd-netbsd.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/sock-dummy.c ctrl/threads/thr-dummy.c core/cd/cd-netbsd.c)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "OpenBSD")
 	add_definitions(-DARCH_IS_NETBSD=1)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/dummy/sock-dummy.c ctrl/threads/thr-dummy.c core/cd/netbsd/cd-netbsd.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/sock-dummy.c ctrl/threads/thr-dummy.c core/cd/cd-netbsd.c)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	add_definitions(-DARCH_IS_WINDOWS=1)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/windows/sock-windows.c ctrl/threads/thr-windows.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/sock-windows.c ctrl/threads/thr-windows.c)
 else ()
 	add_definitions(-DUNKNOWN_ARCH=1)
-	set(kronos_SOURCES ${kronos_SOURCES} core/net/dummy/sock-dummy.c ctrl/threads/thr-dummy.c)
+	set(kronos_SOURCES ${kronos_SOURCES} core/net/sock-dummy.c ctrl/threads/thr-dummy.c)
 endif ()
 
 if (CMAKE_COMPILER_IS_GNUCC)
